@@ -6,7 +6,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from . import config
 from .data_loader import list_ghats, load_readings
 from .limits import CLASS_B, CONTEXT_ONLY
-from .scoring import rank_ghats
+from .scoring import rank_ghats, ghat_detail
 
 app = FastAPI(title="Visarjan Ghat Watch API", version="0.1.0")
 
@@ -56,7 +56,15 @@ def ghats():
 def ranking(festival: str = "Durga"):
     if festival not in {"Durga", "Ganesh"}:
         raise HTTPException(400, "festival must be Durga or Ganesh")
-    try:
-        return {"festival": festival, "ranking": rank_ghats(festival)}
-    except NotImplementedError:
-        raise HTTPException(501, "Ranking not implemented yet")
+    result = rank_ghats(festival)
+    return {"festival": festival, **result}
+
+
+@app.get("/api/ghat")
+def ghat(site: str, festival: str = "Durga"):
+    if festival not in {"Durga", "Ganesh"}:
+        raise HTTPException(400, "festival must be Durga or Ganesh")
+    detail = ghat_detail(site, festival)
+    if detail is None:
+        raise HTTPException(404, f"No data for site '{site}' in {festival}")
+    return detail
