@@ -107,7 +107,7 @@ export default function OfficialBriefPage() {
         />
       </div>
 
-      <div className="max-w-4xl w-full mx-auto px-4 sm:px-8 pt-6 space-y-6">
+      <div className="max-w-7xl w-full mx-auto px-4 sm:px-8 pt-6 space-y-6">
         {/* Controls */}
         <div className="no-print p-4 rounded-2xl bg-white border border-forest/15 shadow-subtle flex flex-wrap items-center justify-between gap-4">
           <div className="flex items-center gap-2">

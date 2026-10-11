@@ -19,13 +19,11 @@ import {
 import Navbar from '../components/layout/Navbar';
 import Footer from '../components/layout/Footer';
 import WaterRingLogo from '../components/ui/WaterRingLogo';
-import ImpactQuadrant from '../components/charts/ImpactQuadrant';
-import RankingsTable from '../components/tables/RankingsTable';
-import ConfidenceBadge from '../components/ui/ConfidenceBadge';
 import { useFestival } from '../context/FestivalContext';
 
 export default function LandingPage() {
-  const { festival, ghatsAnalysis, summary } = useFestival();
+  // Only the golden numbers are shown on this page; the ranked data lives in /app.
+  const { summary } = useFestival();
   const [activeStep, setActiveStep] = useState(0);
 
   const steps = [
@@ -51,7 +49,7 @@ export default function LandingPage() {
       num: '04',
       title: 'Impact & Recovery Quantification',
       desc: 'Computes parameter deltas and post-immersion rebound rates only where both required phase observations exist.',
-      detail: 'Nothing is extrapolated: a missing test stays missing rather than being read as clean water or as no impact.'
+      detail: 'Nothing is extrapolated: a missing test stays missing rather than being treated as a pass or as no impact.'
     },
     {
       num: '05',
@@ -66,20 +64,36 @@ export default function LandingPage() {
       <Navbar />
 
       {/* ========================================================
-          HERO SECTION — "The Living Atlas"
+          HERO SECTION — "The Living Atlas" (Image-Backed Centered Composition)
           ======================================================== */}
-      <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden bg-carto-grid border-b border-forest/15">
+      <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden bg-light-grey border-b border-forest/15">
+        {/* Centered Hero Photographic Background — Full Opacity & High Visibility */}
+        <div className="absolute inset-0 z-0 overflow-hidden">
+          <img
+            src="/images/bhopal-hero.jpg"
+            alt="Upper Lake Bhojtal morning ghat in Bhopal"
+            className="w-full h-full object-cover object-center opacity-100"
+            onError={(e) => {
+              e.target.style.display = 'none';
+            }}
+          />
+          {/* Minimal subtle gradient only on the left to ensure effortless text legibility without dimming the photo */}
+          <div className="absolute inset-0 bg-gradient-to-r from-white/50 via-white/20 to-transparent pointer-events-none" />
+          <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-light-grey/60 to-transparent pointer-events-none" />
+        </div>
+
+        {/* Content Container (Layered above the background image, preserving left alignment) */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          <div className="max-w-2xl lg:max-w-3xl">
             {/* Left Column: Headlines & Story */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="lg:col-span-7 space-y-6"
+              className="space-y-6"
             >
               {/* Civic Tag & Location Annotation */}
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white border border-forest/20 shadow-subtle text-xs font-mono">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/90 backdrop-blur-sm border border-forest/20 shadow-subtle text-xs font-mono">
                 <span className="w-2 h-2 rounded-full bg-bright-yellow animate-pulse"></span>
                 <span className="font-semibold text-forest">Bhopal, Madhya Pradesh</span>
                 <span className="text-muted-grey">· Upper & Lower Lake Ecosystem</span>
@@ -94,7 +108,7 @@ export default function LandingPage() {
               </h1>
 
               {/* Supporting Editorial Copy */}
-              <p className="text-base sm:text-lg text-charcoal/80 leading-relaxed max-w-2xl">
+              <p className="text-base sm:text-lg text-charcoal/90 leading-relaxed max-w-2xl drop-shadow-sm">
                 A high pollution reading during idol immersion does not reveal whether the water was already degraded beforehand. <strong>Visarjan Ghat Watch</strong> examines multi-year water quality across baseline, immersion, and recovery phases—transforming dense PDF reports into clear, audited civic intelligence.
               </p>
 
@@ -110,15 +124,15 @@ export default function LandingPage() {
 
                 <a
                   href="#how-it-works"
-                  className="px-6 py-3.5 rounded-xl bg-white text-charcoal border border-forest/20 font-semibold hover:bg-pale-green/40 hover:text-forest transition-all duration-200 inline-flex items-center gap-2"
+                  className="px-6 py-3.5 rounded-xl bg-white/90 backdrop-blur-sm text-charcoal border border-forest/20 font-semibold hover:bg-pale-green/60 hover:text-forest transition-all duration-200 inline-flex items-center gap-2"
                 >
                   <span>Understand Our Method</span>
                   <ChevronRight className="w-4 h-4 text-muted-grey" />
                 </a>
               </div>
 
-              {/* Golden numbers, read from /api/summary rather than typed in here */}
-              <div className="pt-6 border-t border-forest/15 grid grid-cols-3 gap-4 font-mono text-xs text-muted-grey">
+              {/* Quick Golden Evidence Metrics */}
+              <div className="pt-6 border-t border-forest/15 grid grid-cols-3 gap-4 font-mono text-xs text-muted-grey bg-white/70 backdrop-blur-sm p-4 rounded-xl border border-forest/10 max-w-xl">
                 <div>
                   <span className="block text-xl font-bold text-forest font-sans">
                     {summary ? summary.rows.toLocaleString() : '—'}
@@ -139,50 +153,19 @@ export default function LandingPage() {
                 </div>
               </div>
             </motion.div>
-
-            {/* Right Column: Hero Photographic Composition */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.7, delay: 0.2 }}
-              className="lg:col-span-5 relative"
-            >
-              <div className="relative rounded-2xl overflow-hidden shadow-elevated border-2 border-white bg-white group">
-                <img
-                  src="/images/bhopal-hero.jpg"
-                  alt="Upper Lake Bhojtal morning ghat in Bhopal"
-                  className="w-full h-[400px] object-cover group-hover:scale-105 transition-transform duration-700"
-                  onError={(e) => {
-                    e.target.style.display = 'none';
-                    e.target.nextSibling.style.display = 'block';
-                  }}
-                />
-                {/* Fallback designed placeholder if image cannot load */}
-                <div className="hidden w-full h-[400px] bg-forest-deep p-8 text-white relative">
-                  <div className="absolute inset-0 bg-contour-pattern opacity-20"></div>
-                  <WaterRingLogo size={64} className="text-bright-yellow mb-4" />
-                  <h3 className="text-xl font-bold">Bhopal Lake Water Intelligence</h3>
-                  <p className="text-xs text-white/70 mt-2">Historic stone ghats on Upper Lake Bhojtal.</p>
-                </div>
-
-                {/* Subtle Cartographic Overlay Badge */}
-                <div className="absolute bottom-4 left-4 right-4 p-3.5 rounded-xl bg-white/95 backdrop-blur-md border border-forest/20 shadow-lg flex items-center justify-between text-xs">
-                  <div>
-                    <div className="font-bold text-charcoal font-sans flex items-center gap-1.5">
-                      <MapPin className="w-3.5 h-3.5 text-forest" />
-                      Upper Lake (Bhojtal)
-                    </div>
-                    <div className="text-[10px] text-muted-grey font-mono mt-0.5">
-                      Ramsar Wetland Site · 361 sq km basin
-                    </div>
-                  </div>
-                  <span className="font-mono text-[10px] px-2 py-1 rounded bg-pale-green text-forest font-semibold">
-                    Class B Standard
-                  </span>
-                </div>
-              </div>
-            </motion.div>
           </div>
+        </div>
+
+        {/* Subtle Cartographic Overlay Badge */}
+        <div className="hidden lg:flex absolute bottom-6 right-8 z-10 items-center gap-3 p-3 px-4 rounded-xl bg-white/90 backdrop-blur-md border border-forest/20 shadow-md text-xs">
+          <MapPin className="w-4 h-4 text-forest shrink-0" />
+          <div>
+            <div className="font-bold text-charcoal font-sans">Upper Lake (Bhojtal)</div>
+            <div className="text-[10px] text-muted-grey font-mono">Ramsar Wetland Site · Historic Stone Ghats</div>
+          </div>
+          <span className="font-mono text-[10px] px-2 py-0.5 rounded bg-pale-green text-forest font-semibold ml-2">
+            Class B Standard
+          </span>
         </div>
       </section>
 
@@ -199,7 +182,7 @@ export default function LandingPage() {
               Three Distinct Phases. Three Crucial Questions.
             </h2>
             <p className="text-base text-muted-grey leading-relaxed">
-              Evaluating an immersion ghat without baseline context misdiagnoses urban runoff as festival impact. Visarjan Ghat Watch structures observations into three sequential windows:
+              Judging an immersion ghat without its baseline reads urban runoff as festival impact. Visarjan Ghat Watch structures observations into three sequential windows:
             </p>
           </div>
 
@@ -362,67 +345,9 @@ export default function LandingPage() {
       </section>
 
       {/* ========================================================
-          SECTION E — FEATURED ANALYTICAL PREVIEW (REAL CHARTS)
-          ======================================================== */}
-      <section className="py-20 bg-white border-b border-forest/15">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-10 border-b border-forest/10">
-            <div>
-              <span className="text-xs font-mono uppercase tracking-widest text-forest font-bold px-3 py-1 rounded-full bg-pale-green inline-block">
-                Live Data Preview
-              </span>
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-charcoal tracking-tight font-sans mt-2">
-                Inside the Intelligence Workspace
-              </h2>
-              <p className="text-sm text-muted-grey mt-1">
-                Computed by the API from the 2023 to 2025 MPPCB readings for {festival} immersion, against CPCB Class B limits.
-              </p>
-            </div>
-
-            <Link
-              to="/app"
-              className="px-5 py-2.5 rounded-xl bg-forest text-white text-xs font-semibold hover:bg-forest-deep transition-all shadow-sm flex items-center gap-2 self-start md:self-auto"
-            >
-              <span>Launch Full Workspace</span>
-              <ExternalLink className="w-3.5 h-3.5 text-bright-yellow" />
-            </Link>
-          </div>
-
-          {/* Interactive Matrix & Rankings Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mt-10">
-            {/* Impact Quadrant Live Preview */}
-            <div className="lg:col-span-7">
-              <ImpactQuadrant ghats={ghatsAnalysis} />
-            </div>
-
-            {/* Priority Rankings Live Preview */}
-            <div className="lg:col-span-5 flex flex-col justify-between">
-              <RankingsTable
-                ghats={ghatsAnalysis}
-                isCompact={true}
-                showSearch={false}
-              />
-              <div className="mt-4 p-4 rounded-xl bg-light-grey border border-forest/15 flex items-center justify-between text-xs">
-                <div>
-                  <span className="font-semibold text-charcoal block">Explore All 8 Sites</span>
-                  <span className="text-muted-grey text-[11px]">Includes unmonitored sites such as Arch Bridge</span>
-                </div>
-                <Link
-                  to="/app/rankings"
-                  className="px-3 py-1.5 rounded-lg bg-forest text-white text-xs font-semibold hover:bg-forest-deep"
-                >
-                  View Rankings
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ========================================================
           SECTION F — THE BHOPAL STORY (EDITORIAL & PHOTOGRAPHS)
           ======================================================== */}
-      <section id="bhopal-story" className="py-20 bg-light-grey border-b border-forest/15">
+      <section id="bhopal-story" className="py-20 bg-white border-b border-forest/15">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl space-y-3">
             <span className="text-xs font-mono uppercase tracking-widest text-forest font-bold px-3 py-1 rounded-full bg-pale-green inline-block">
