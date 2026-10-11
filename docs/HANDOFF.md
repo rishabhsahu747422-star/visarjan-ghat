@@ -27,15 +27,64 @@ Durga ranking (v0): Bairagarh 0.527 High (Low confidence, latest data 2024), Sha
 7. CSV files show as modified in `git status` only because of Windows line endings. Do not commit them.
 
 ## Still open (in priority order)
-1. **Ghat detail page** (owners B, C): click a ranked ghat, call `api.ghat(site, festival)`, show pre/during/after by year against the Class B limit line for DO, BOD, pH. Missing = gap, not 0. Every number shows year + `source_page`. Raw values beside deltas. Components planned: `QuadrantChart`, `PhaseChart`, `EvidenceTable` in `frontend/src/components/`.
-2. **Data and limits page**: the honest-limits list (README "Limits we state openly"), Class B rationale, units assumed, `/api/summary` golden numbers, `no_data_sites`.
-3. **Design pass**: current UI is plain. Wanted: distinctive, deliberate colour (water-toned base, calm-to-alarming risk ramp, not flat white), smooth page transitions and button feedback, restrained animation. Hindi font via `@fontsource/noto-sans-devanagari` (no runtime CDN). Readable on a projector and a phone.
-4. **Hindi sign-off by a human**: every string in `backend/app/prompts.py` (marked there) and `brief.py`. Not machine-checkable. Needed before 3:00 PM.
-5. **Brief has no action line.** The officer decides cleaning, aeration, testing. Add one short line per top ghat (e.g. extra testing during immersion for Low confidence, use `test_priority`), keep under the 150-word cap (D-18), add the Hindi, keep numbers validated.
-6. **`docs/FACTCHECK.md` and `docs/DEMO.md` do not exist.** FACTCHECK: 10 numbers (ghat, year, phase, parameter, value, source_page, "checked: no") split among teammates to verify in `resources/` PDFs. DEMO: 6-minute script (problem, officer, ranked list, one ghat with source page, brief in Hindi/English, honest gaps).
-7. **README**: fill TEAM NAME and MEMBERS; confirm "how to run" still works in 5 steps; list extra data used (Free Press Journal / Hitavada ghat list is in `data/ghat_meta.json`, unverified).
-8. **Optional/stretch**: test the LLM brief once with a real `GROQ_API_KEY` set in the environment (never in a file); robustness toggle; map of ghats.
-9. Run `git grep -n -i -E "api_key|gsk_|csk-|sk-ant"` before the final push. Only `.env.example` with empty values may match.
+Items 1, 2, 3, 5, 6 and 9 of the previous list are done (second session, same day). What is left:
+
+1. **Hindi sign-off by a human.** Every Hindi string in `backend/app/prompts.py` (marked there) and
+   `brief.py`. Four new action strings were added (`ACTIONS_HI`) and three existing strings were
+   shortened to fit the word cap: `FOOTER_HI`, the Hindi heading ("इन घाटों पर पहले ध्यान:") and the
+   Hindi title, which now uses the short festival name. Not machine-checkable. Needed before 3:00 PM.
+2. **Fill TEAM NAME and MEMBERS in `README.md`** (line 5). Nothing else in the README is a placeholder.
+3. **`docs/FACTCHECK.md` is written but nothing is verified.** Ten rows, two per teammate, every one
+   says `checked: no`. Each row names the report, the PDF page and the printed site name. Until this
+   is done, do not claim a verified fact check in the demo.
+4. **Decide what to do with `data/fixtures/`.** Both files are real snapshots of the live API and
+   agree with it, but nothing imports them any more. The 3:45 checklist in `docs/TEAM.md` says
+   "fixtures deleted"; delete them or relabel them as contract examples.
+5. **`_risk_level(None)` returns "Low"** (`backend/app/scoring.py`). Unreachable today, because a
+   ghat with no measured scored data never reaches the ranking, but it is the one place in the code
+   where a missing score would read as low risk. One line to harden; A owns the file.
+6. **A's 3:15 property test is missing**: "removing a reading never makes a ghat look cleaner".
+   `test_unknown_phase_never_zero` and `test_no_zero_measured_ghat_ranked` cover neighbouring
+   ground, not the monotonicity property itself.
+7. **Optional/stretch**: test the LLM brief once with a real `GROQ_API_KEY` in the environment
+   (never in a file) — the Groq path is unit-tested with a fake transport but has never spoken to
+   the real API; robustness toggle; map of ghats.
+
+Done in the second session, with notes:
+- **Ghat detail page** (`pages/Detail.tsx`, `components/PhaseChart.tsx`, `EvidenceTable.tsx`,
+  `QuadrantChart.tsx`): pre/during/after per year per parameter against the Class B line, gaps shown
+  as breaks in the line and named in the caption, every reading with "Report {year}, page {n}", raw
+  values beside every delta, print stylesheet. Charts are hand-rolled SVG — no chart library.
+- **Data and limits page** (`pages/Gaps.tsx`): golden numbers from `/api/summary`, Class B rationale,
+  assumed units, the scoring walk-through, every known gap, the no-data sites.
+- **Tabs** in `App.tsx` (Ranking, Ghat detail, Brief, Data and limits), no router library; the tab,
+  the selected ghat and the festival are mirrored into the URL hash, so `#/detail/<site>?festival=Durga`
+  is a deep link (the deep links are listed in `docs/DEMO.md`).
+- **Design pass** in `styles.css`: water-toned base, a risk ramp that changes lightness as well as
+  hue, dashed outlines plus hatching for anything missing, page fade, button feedback, reduced-motion
+  respected, 560 px breakpoint, print rules. Hindi font is bundled via
+  `@fontsource/noto-sans-devanagari` (imported in `main.tsx`, no runtime CDN).
+- **Brief action line** (D-22): one short action per top ghat, chosen in `brief.py` from computed
+  values only, never dropped by the word-cap ladder. Fitting it inside D-18's 150 words needed D-23
+  (a new ladder step and the shortened Hindi strings above). Durga and Ganesh both render at detail
+  level 2 — readings, quadrant, recovery, confidence and action — at 142/150 EN and 150/150 HI for
+  Durga. Hindi has no headroom: if a site name or a reading changes, the ladder drops the quadrant
+  phrase, which is the intended behaviour, not a bug.
+- One of D's assertions was narrowed: `test_brief_never_says_recovered_and_flags_still_above_limits`
+  used to ban the string "clean" outright, which blocked the action "Clean the ghat first." It now
+  bans "clean" as a description of the water ("clean water", "is clean", "cleaner", …) and allows it
+  as an action for the officer. Worth a second pair of eyes.
+- `docs/DEMO.md`: 6-minute walkthrough, the 2-minute cut to record, pre-flight checklist, what to say
+  if something breaks, and the questions to expect.
+- README: status table rebuilt to match the code, Windows venv line, dev-proxy note, extra data
+  sourced and linked.
+- `git grep -n -i -E "api_key|gsk_|csk-|sk-ant"` is clean: variable names only, `.env.example` empty.
+
+Checked this session: 78 backend tests pass, `npm run build` passes, every page and component
+renders without a React warning against the live payloads, and `/api/ranking`, `/api/ghat`
+(including the site name with a "/"), `/api/brief`, `/api/ghats` and the 400/404 paths all answer
+correctly. The ranking, evidence, detail and brief payloads match the contract in `docs/TEAM.md`
+field for field for both festivals.
 
 ## Commands
 ```
@@ -46,4 +95,4 @@ cd frontend && npm run build                 # tsc + vite build, must pass
 ```
 
 ## Files and owners
-`backend/app/scoring.py`, `main.py`, `tests/test_scoring.py`, `data/fixtures/`: A. `backend/app/brief.py`, `prompts.py`, `tests/test_brief.py`, `frontend/src/pages/Brief.*`: D. Other `frontend/src/*`: B, C. `README.md`, `docs/FACTCHECK.md`, `docs/DEMO.md`: E. Log every weight/threshold/definition change in `docs/DECISIONS.md` (next free number: D-22).
+`backend/app/scoring.py`, `main.py`, `tests/test_scoring.py`, `data/fixtures/`: A. `backend/app/brief.py`, `prompts.py`, `tests/test_brief.py`, `frontend/src/pages/Brief.*`: D. Other `frontend/src/*`: B, C. `README.md`, `docs/FACTCHECK.md`, `docs/DEMO.md`: E. Log every weight/threshold/definition change in `docs/DECISIONS.md` (next free number: D-24).

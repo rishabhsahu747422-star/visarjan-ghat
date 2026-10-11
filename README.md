@@ -2,7 +2,7 @@
 
 **Track 2, Claude Impact Lab x Cerebras Café Compute, Bhopal, 11 Oct 2026**
 
-Team: _TEAM NAME_ · Members: _NAME 1, NAME 2, NAME 3, NAME 4, NAME 5_
+Team: **_TEAM NAME — FILL THIS IN BEFORE SUBMITTING_** · Members: _NAME 1, NAME 2, NAME 3, NAME 4, NAME 5_
 
 ## The one user
 A Bhopal Municipal Corporation officer planning Durga visarjan (20 Oct 2026) at the ghats. They decide where to send cleaning, aeration and extra water testing.
@@ -15,32 +15,34 @@ Ranks Bhopal's immersion ghats by water-quality risk against CPCB Class B limits
 - the report page behind every number,
 - a short Hindi and English brief the officer can forward.
 
-Details: [PRD](docs/PRD.md) · [Proposed solution](docs/PROPOSED_SOLUTION.md) · [Decisions](docs/DECISIONS.md) · [Deployment](docs/DEPLOYMENT.md)
+Details: [PRD](docs/PRD.md) · [Proposed solution](docs/PROPOSED_SOLUTION.md) · [Decisions](docs/DECISIONS.md) · [Fact check](docs/FACTCHECK.md) · [Demo script](docs/DEMO.md) · [Deployment](docs/DEPLOYMENT.md)
 
 ## Run it (5 steps)
 ```bash
 # 1. Backend
-cd backend && python -m venv .venv && source .venv/bin/activate
+cd backend && python -m venv .venv && source .venv/bin/activate   # Windows: .venv\Scripts\activate
 # 2.
-pip install -r requirements-dev.txt && python -m pytest -q
+pip install -r requirements-dev.txt && python -m pytest -q        # 78 tests pass
 # 3.
 uvicorn app.main:app --reload --port 8000
 # 4. Frontend (new terminal)
 cd frontend && npm install && npm run dev
 # 5. Open http://localhost:5173
 ```
-Copy `.env.example` to `backend/.env` only if you want an LLM-written brief. Without keys the app uses a template brief.
+The dev server proxies `/api` to port 8000, so no configuration is needed locally. Copy `.env.example` to `backend/.env` only if you want an LLM-written brief. Without keys the app uses a template brief, which is what the demo runs.
 
 ## Status
 | Works | Not yet |
 |---|---|
-| Data loading and row classification (measured, below detection, missing) | Ghat detail page with charts (API `/api/ghat` is ready) |
-| Golden tests reproducing the problem-statement numbers | Data and limits page in the UI |
-| Class B limits and breach severity | Native-speaker sign-off on the Hindi brief |
-| Ranking per festival with reason, confidence, impact, recovery, test priority and source pages | LLM-written brief tested with a real key (template brief is the default) |
-| API: health, summary, ghats, ranking, ghat detail, brief | Robustness toggle |
-| Bilingual brief (template + number-validated optional LLM), 150-word cap | Numbers spot-checked against the PDFs (`docs/FACTCHECK.md`) |
-| Ranked list and brief in the UI, 72 backend tests passing | |
+| Data loading and row classification (measured, below detection, missing) | Native-speaker sign-off on the Hindi strings in `backend/app/prompts.py` and `brief.py` |
+| Golden tests reproducing the problem-statement numbers | The ten readings in `docs/FACTCHECK.md` verified against the PDFs (table is written, nothing checked yet) |
+| Class B limits and breach severity | LLM-written brief tested with a real key (template brief is the default and the demo path) |
+| Ranking per festival with reason, confidence, impact, recovery, test priority and source pages | Robustness toggle (re-rank under alternative limits) |
+| API: health, summary, ghats, ranking, ghat detail, brief | Map of the ghats |
+| Bilingual brief (template + number-validated optional LLM), 150-word cap, one action per top ghat | Team name and members in this README |
+| UI: ranked list, quadrant chart, ghat detail with phase charts and every source page, brief, data-and-limits page | |
+| Missing data shown as a gap everywhere, never as 0 and never as low risk | |
+| 78 backend tests passing, `npm run build` clean | |
 | Deploy config for Render and Vercel | |
 
 "Back to pre level" is never shown as clean: a ghat whose water is no worse a week later can still be above the limits (DECISIONS D-15, D-21).
@@ -50,7 +52,9 @@ _Update this table before submitting. Honesty scores better than a hidden gap._
 ## Data
 All data is public and comes from the participant pack ([Laaaaksh/bhopal-impact-lab-2026](https://github.com/Laaaaksh/bhopal-impact-lab-2026)) built from MPPCB visarjan reports 2023 to 2025 and CPCB water-quality criteria.
 - `data/bhopal_ghats_2023_2025.csv`, `data/sample_bhopal_2025.csv`, `data/cpcb_water_quality_criteria.csv`, `data/DATA_DICTIONARY.md`: from the pack.
-- `data/ghat_meta.json`: our own working list of ghats named for 2026 immersion, from Free Press Journal and The Hitavada, 26 Feb 2026. **Unverified, not an official order.**
+- `data/ghat_meta.json`: our own working list of ghats named for 2026 immersion, from [Free Press Journal](https://www.freepressjournal.in/) and [The Hitavada](https://www.thehitavada.com/), 26 Feb 2026. **Unverified, not an official order.** It only adds the `bmc_list_2026` label and the Arch Bridge "no data" entry; it never changes a score.
+
+No other outside data is used. Nothing here is personal data.
 
 ## Limits we state openly
 - The reports print no units. We use the standard unit for each test.
