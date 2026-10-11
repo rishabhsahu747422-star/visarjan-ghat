@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { NavLink, Link, useLocation } from 'react-router-dom';
 import {
   Compass,
@@ -8,16 +8,20 @@ import {
   Database,
   ChevronLeft,
   ChevronRight,
-  DatabaseZap,
-  ArrowUpRight
+  ArrowUpRight,
+  X
 } from 'lucide-react';
 import WaterRingLogo from '../ui/WaterRingLogo';
 import { useFestival } from '../../context/FestivalContext';
 
-export default function AtlasRail({ isMobileOpen = false, closeMobileDrawer = () => {} }) {
-  const [collapsed, setCollapsed] = useState(false);
+export default function AtlasRail({
+  collapsed = false,
+  onToggleCollapse = () => {},
+  isMobileOpen = false,
+  closeMobileDrawer = () => {},
+}) {
   const location = useLocation();
-  const { festival, summary } = useFestival();
+  const { festival } = useFestival();
 
   const navItems = [
     {
@@ -77,28 +81,33 @@ export default function AtlasRail({ isMobileOpen = false, closeMobileDrawer = ()
 
   return (
     <>
-      {/* Desktop Atlas Rail */}
+      {/* Desktop Atlas Rail (White Background, Forest Green Accents) */}
       <aside
-        className={`hidden lg:flex flex-col fixed top-0 bottom-0 left-0 z-40 bg-forest text-white transition-all duration-300 shadow-elevated border-r border-forest-light/40 ${railWidth}`}
+        className={`hidden lg:flex flex-col fixed top-0 bottom-0 left-0 z-40 bg-white text-forest transition-all duration-300 ease-in-out shadow-subtle border-r border-gray-200 ${railWidth}`}
         aria-label="Atlas Rail Navigation"
       >
         {/* Brand Header */}
-        <div className="p-4 flex items-center justify-between border-b border-white/10 shrink-0">
+        <div
+          className={`shrink-0 border-b border-gray-200 transition-all duration-300 ${
+            collapsed ? 'p-3 flex flex-col items-center gap-2' : 'p-4 flex items-center justify-between'
+          }`}
+        >
           <Link
             to="/"
             className="flex items-center gap-3 overflow-hidden group py-1"
             title="Return to Public Landing Page"
           >
-            <div className="text-bright-yellow group-hover:scale-105 transition-transform">
-              <WaterRingLogo size={36} />
+            <div className="text-forest group-hover:scale-105 transition-transform shrink-0">
+              <WaterRingLogo size={collapsed ? 32 : 36} />
             </div>
+
             {!collapsed && (
               <div className="flex flex-col truncate">
-                <span className="font-bold text-sm tracking-tight text-white flex items-center gap-1.5 font-sans">
+                <span className="font-bold text-sm tracking-tight text-forest flex items-center gap-1.5 font-sans">
                   The Living Atlas
                   <span className="inline-block w-1.5 h-1.5 rounded-full bg-bright-yellow"></span>
                 </span>
-                <span className="text-[10px] tracking-wider uppercase font-mono text-white/70">
+                <span className="text-[10px] tracking-wider uppercase font-mono text-muted-grey">
                   Visarjan Ghat Watch
                 </span>
               </div>
@@ -106,19 +115,20 @@ export default function AtlasRail({ isMobileOpen = false, closeMobileDrawer = ()
           </Link>
 
           <button
-            onClick={() => setCollapsed(!collapsed)}
-            className="text-white/60 hover:text-white p-1 rounded-md hover:bg-forest-light/50 transition-colors focus:outline-none focus:ring-1 focus:ring-bright-yellow"
+            type="button"
+            onClick={onToggleCollapse}
+            className="text-forest/70 hover:text-forest p-1.5 rounded-lg hover:bg-pale-green border border-gray-200/80 transition-colors focus:outline-none focus:ring-2 focus:ring-forest"
             title={collapsed ? 'Expand Atlas Rail' : 'Collapse Atlas Rail'}
-            aria-label="Toggle rail collapse"
+            aria-label={collapsed ? 'Expand Atlas Rail' : 'Collapse Atlas Rail'}
           >
             {collapsed ? <ChevronRight className="w-4 h-4" /> : <ChevronLeft className="w-4 h-4" />}
           </button>
         </div>
 
         {/* Navigation Items (01 - 05) */}
-        <nav className="flex-1 py-6 px-3 space-y-2 overflow-y-auto">
+        <nav className="flex-1 py-5 px-2.5 space-y-1.5 overflow-y-auto">
           {!collapsed && (
-            <div className="px-3 pb-2 text-[10px] font-mono uppercase tracking-widest text-white/50">
+            <div className="px-3 pb-2 text-[10px] font-mono uppercase tracking-widest text-muted-grey font-semibold">
               Atlas Rail · Navigation
             </div>
           )}
@@ -131,12 +141,15 @@ export default function AtlasRail({ isMobileOpen = false, closeMobileDrawer = ()
               <NavLink
                 key={item.num}
                 to={item.path}
-                className={`group relative flex items-center gap-3.5 px-3 py-3 rounded-xl transition-all duration-200 outline-none focus:ring-2 focus:ring-bright-yellow ${
+                className={`group relative flex items-center rounded-xl transition-all duration-200 outline-none focus:ring-2 focus:ring-forest ${
+                  collapsed ? 'justify-center p-3' : 'gap-3.5 px-3 py-3'
+                } ${
                   active
-                    ? 'bg-pale-green text-forest font-semibold shadow-subtle'
-                    : 'text-white/80 hover:text-white hover:bg-forest-light/60'
+                    ? 'bg-forest text-white font-semibold shadow-sm'
+                    : 'text-forest hover:bg-pale-green hover:text-forest'
                 }`}
-                title={collapsed ? `${item.num} — ${item.label}: ${item.desc}` : undefined}
+                title={`${item.num} — ${item.label}: ${item.desc}`}
+                aria-label={`${item.num} — ${item.label}`}
               >
                 {/* Bright Yellow Active Indicator Bar */}
                 {active && (
@@ -144,24 +157,26 @@ export default function AtlasRail({ isMobileOpen = false, closeMobileDrawer = ()
                 )}
 
                 {/* Number Badge (01 - 05) */}
-                <span
-                  className={`font-mono text-xs px-1.5 py-0.5 rounded transition-colors shrink-0 ${
-                    active
-                      ? 'bg-forest text-bright-yellow font-bold'
-                      : 'text-bright-yellow/80 bg-forest-deep/60 group-hover:text-bright-yellow'
-                  }`}
-                >
-                  {item.num}
-                </span>
+                {!collapsed && (
+                  <span
+                    className={`font-mono text-xs px-1.5 py-0.5 rounded transition-colors shrink-0 ${
+                      active
+                        ? 'bg-forest-deep text-bright-yellow font-bold'
+                        : 'text-forest bg-light-grey border border-forest/15 font-semibold group-hover:bg-white'
+                    }`}
+                  >
+                    {item.num}
+                  </span>
+                )}
 
                 {/* Lucide Outline Icon */}
                 <IconComponent
                   className={`w-5 h-5 shrink-0 transition-transform group-hover:scale-105 ${
-                    active ? 'text-forest' : 'text-white/70 group-hover:text-white'
+                    active ? 'text-white' : 'text-forest'
                   }`}
                 />
 
-                {/* Label & Description */}
+                {/* Label & Description (expanded mode) */}
                 {!collapsed && (
                   <div className="flex flex-col text-left truncate">
                     <span className="text-sm tracking-tight leading-tight truncate">
@@ -169,7 +184,7 @@ export default function AtlasRail({ isMobileOpen = false, closeMobileDrawer = ()
                     </span>
                     <span
                       className={`text-[10px] truncate ${
-                        active ? 'text-forest/70 font-normal' : 'text-white/50'
+                        active ? 'text-white/80 font-normal' : 'text-muted-grey'
                       }`}
                     >
                       {item.desc}
@@ -182,62 +197,85 @@ export default function AtlasRail({ isMobileOpen = false, closeMobileDrawer = ()
         </nav>
 
         {/* Dataset Status Area at Bottom */}
-        <div className="p-3.5 m-2.5 rounded-xl bg-forest-deep/80 border border-white/10 shrink-0">
-          <div className="flex items-center gap-2.5">
-            <div className="w-2.5 h-2.5 rounded-full bg-bright-yellow animate-pulse shrink-0"></div>
-            {!collapsed && (
-              <div className="text-xs truncate">
-                <div className="font-semibold text-white/90 font-mono tracking-tight flex items-center justify-between">
-                  <span>{festival} Visarjan</span>
-                  <span className="text-[10px] text-bright-yellow font-normal">Active</span>
-                </div>
-                <div className="text-[10px] text-white/60 font-mono mt-0.5">
-                  1,524 rows · 2023–2025
+        <div
+          className={`border-t border-gray-200 shrink-0 transition-all duration-300 ${
+            collapsed ? 'p-2.5 flex flex-col items-center gap-2' : 'p-3.5 m-2.5 rounded-xl bg-light-grey/90 border border-gray-200'
+          }`}
+        >
+          {collapsed ? (
+            <div
+              className="flex flex-col items-center gap-1.5 py-2"
+              title={`${festival} Visarjan Active · 1,524 MPPCB rows (2023–2025)`}
+            >
+              <div className="w-2.5 h-2.5 rounded-full bg-bright-yellow animate-pulse" />
+              <Link
+                to="/"
+                className="p-1.5 rounded-lg text-forest hover:bg-pale-green transition-colors"
+                title="Public Landing Page"
+                aria-label="Public Landing Page"
+              >
+                <ArrowUpRight className="w-4 h-4 text-forest" />
+              </Link>
+            </div>
+          ) : (
+            <>
+              <div className="flex items-center gap-2.5">
+                <div className="w-2.5 h-2.5 rounded-full bg-bright-yellow animate-pulse shrink-0"></div>
+                <div className="text-xs truncate flex-1">
+                  <div className="font-semibold text-forest font-mono tracking-tight flex items-center justify-between">
+                    <span>{festival} Visarjan</span>
+                    <span className="text-[10px] px-1.5 py-0.2 rounded bg-pale-green text-forest font-semibold">
+                      Active
+                    </span>
+                  </div>
+                  <div className="text-[10px] text-muted-grey font-mono mt-0.5">
+                    1,524 rows · 2023–2025
+                  </div>
                 </div>
               </div>
-            )}
-          </div>
 
-          {!collapsed && (
-            <Link
-              to="/"
-              className="mt-3 w-full inline-flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-lg bg-forest-light/60 hover:bg-forest-light text-[11px] text-white/90 hover:text-white transition-colors"
-            >
-              <span>Public Landing Page</span>
-              <ArrowUpRight className="w-3 h-3 text-bright-yellow" />
-            </Link>
+              <Link
+                to="/"
+                className="mt-3 w-full inline-flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-lg bg-white hover:bg-pale-green border border-forest/15 text-[11px] text-forest font-semibold transition-colors shadow-subtle"
+              >
+                <span>Public Landing Page</span>
+                <ArrowUpRight className="w-3 h-3 text-forest" />
+              </Link>
+            </>
           )}
         </div>
       </aside>
 
-      {/* Mobile Drawer Navigation */}
+      {/* Mobile Drawer Navigation (Consistent White Theme with Forest Accents) */}
       {isMobileOpen && (
         <div className="lg:hidden fixed inset-0 z-50 flex">
           {/* Backdrop */}
           <div
-            className="fixed inset-0 bg-black/60 backdrop-blur-sm transition-opacity"
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm transition-opacity"
             onClick={closeMobileDrawer}
           />
 
           {/* Drawer Body */}
-          <div className="relative w-72 max-w-full bg-forest text-white h-full flex flex-col shadow-2xl p-4">
-            <div className="flex items-center justify-between pb-4 border-b border-white/10">
+          <div className="relative w-72 max-w-full bg-white text-forest h-full flex flex-col shadow-2xl p-4 border-r border-gray-200">
+            <div className="flex items-center justify-between pb-4 border-b border-gray-200">
               <div className="flex items-center gap-3">
                 <WaterRingLogo size={32} />
                 <div>
-                  <div className="font-bold text-sm">Visarjan Ghat Watch</div>
-                  <div className="text-[10px] text-white/60 font-mono">The Living Atlas</div>
+                  <div className="font-bold text-sm text-forest font-sans">Visarjan Ghat Watch</div>
+                  <div className="text-[10px] text-muted-grey font-mono">The Living Atlas</div>
                 </div>
               </div>
               <button
+                type="button"
                 onClick={closeMobileDrawer}
-                className="text-white/70 hover:text-white p-1 rounded-md"
+                className="text-forest/70 hover:text-forest p-1.5 rounded-lg hover:bg-pale-green"
+                aria-label="Close Mobile Drawer"
               >
-                ✕
+                <X className="w-5 h-5" />
               </button>
             </div>
 
-            <nav className="flex-1 py-4 space-y-1 overflow-y-auto">
+            <nav className="flex-1 py-4 space-y-1.5 overflow-y-auto">
               {navItems.map((item) => {
                 const active = isItemActive(item);
                 const IconComponent = item.icon;
@@ -249,23 +287,30 @@ export default function AtlasRail({ isMobileOpen = false, closeMobileDrawer = ()
                     onClick={closeMobileDrawer}
                     className={`flex items-center gap-3 px-3 py-3 rounded-xl transition-all ${
                       active
-                        ? 'bg-pale-green text-forest font-semibold'
-                        : 'text-white/80 hover:bg-forest-light'
+                        ? 'bg-forest text-white font-semibold shadow-sm'
+                        : 'text-forest hover:bg-pale-green'
                     }`}
                   >
-                    <span className="font-mono text-xs text-bright-yellow font-bold bg-forest-deep px-1.5 py-0.5 rounded">
+                    <span
+                      className={`font-mono text-xs font-bold px-1.5 py-0.5 rounded ${
+                        active ? 'bg-forest-deep text-bright-yellow' : 'bg-light-grey text-forest border border-forest/15'
+                      }`}
+                    >
                       {item.num}
                     </span>
-                    <IconComponent className="w-5 h-5" />
+                    <IconComponent className={`w-5 h-5 ${active ? 'text-white' : 'text-forest'}`} />
                     <span className="text-sm">{item.label}</span>
                   </NavLink>
                 );
               })}
             </nav>
 
-            <div className="pt-4 border-t border-white/10 text-xs text-white/70">
-              <div className="font-mono text-bright-yellow font-semibold">{festival} Mode Active</div>
-              <div className="text-[11px] text-white/50 mt-1">MPPCB 2023–2025 Data Pack</div>
+            <div className="pt-4 border-t border-gray-200 text-xs">
+              <div className="font-mono text-forest font-semibold flex items-center justify-between">
+                <span>{festival} Mode Active</span>
+                <span className="w-2 h-2 rounded-full bg-bright-yellow"></span>
+              </div>
+              <div className="text-[11px] text-muted-grey mt-1 font-mono">MPPCB 2023–2025 Data Pack</div>
             </div>
           </div>
         </div>
