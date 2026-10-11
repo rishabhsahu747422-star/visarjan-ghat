@@ -1,0 +1,15 @@
+{
+  "_note": "Working assumptions from news reports (Free Press Journal 26 Feb 2026 and Hitavada 26 Feb 2026). NOT an official BMC order. Confirm with a mentor before relying on it.",
+  "ghats": {
+    "Bairagarh (Sant Hirdaram) kund": {"bmc_list_2026": "listed"},
+    "Malikhedi kund": {"bmc_list_2026": "listed"},
+    "Prempura ghat": {"bmc_list_2026": "listed"},
+    "Khatlapura ghat": {"bmc_list_2026": "listed"},
+    "Hathaikheda dam / kund": {"bmc_list_2026": "listed"},
+    "Rani Kamlapati ghat / Kamla Park kund": {"bmc_list_2026": "not_listed"},
+    "Shahpura lake ghat": {"bmc_list_2026": "not_listed"}
+  },
+  "no_data_sites": [
+    {"name": "Arch Bridge ghat", "bmc_list_2026": "listed", "note": "In use per news reports, absent from MPPCB data pack. Show as 'no baseline, test before use'."}
+  ]
+}

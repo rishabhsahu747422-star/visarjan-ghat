@@ -1,0 +1,20 @@
+# Render Blueprint: backend API. Frontend goes to Vercel (see docs/DEPLOYMENT.md).
+services:
+  - type: web
+    name: ghat-watch-api
+    runtime: python
+    plan: free
+    buildCommand: pip install -r backend/requirements.txt
+    startCommand: cd backend && uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /api/health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.7
+      - key: ALLOWED_ORIGINS
+        sync: false            # set to your Vercel URL, e.g. https://ghat-watch.vercel.app
+      - key: LLM_PROVIDER
+        value: none            # cerebras | anthropic | none
+      - key: CEREBRAS_API_KEY
+        sync: false
+      - key: ANTHROPIC_API_KEY
+        sync: false
