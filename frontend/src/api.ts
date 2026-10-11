@@ -1,6 +1,10 @@
 const BASE = import.meta.env.VITE_API_BASE_URL ?? "";
 
 export type Festival = "Durga" | "Ganesh";
+export type RiskLevel = "Low" | "Medium" | "High";
+export type Quadrant = "already_bad" | "damaged_by_immersion" | "both" | "stable" | "unknown";
+export type Recovery = "good" | "poor" | "unknown";
+export type ConfidenceLevel = "High" | "Medium" | "Low";
 
 export interface Ghat {
   site: string;
@@ -23,6 +27,62 @@ export interface Summary {
   bod_above_3: number;
 }
 
+export interface Evidence {
+  year: number;
+  phase: "pre" | "during" | "after";
+  parameter: string;
+  value: number | null;
+  status: "measured" | "below_detection" | "missing";
+  limit: string | null;
+  breach: number | null;
+  source_page: number | null;
+}
+
+export interface RankedGhat {
+  rank: number;
+  site: string;
+  water_body: string;
+  risk_score: number | null;
+  risk_level: RiskLevel;
+  quadrant: Quadrant;
+  baseline_severity: number | null;
+  immersion_damage: number | null;
+  recovery: Recovery;
+  after_severity: number | null; // 0 = within limits; "good" recovery with > 0 is still above limits (D-15)
+  latest_data_year: number;
+  confidence: { level: ConfidenceLevel; reasons: string[] };
+  reason: string;
+  bmc_list_2026: "listed" | "not_listed" | "unknown";
+  test_priority: number | null;
+  evidence: Evidence[];
+}
+
+export interface RankingResponse {
+  festival: Festival;
+  formula_version: string;
+  ranking: RankedGhat[];
+  no_data_sites: { name: string; note?: string }[];
+}
+
+export interface GhatDetail {
+  site: string;
+  festival: Festival;
+  readings: (Evidence & { value_as_printed: string | null })[];
+  impact: {
+    year: number; parameter: string;
+    pre: number | null; during: number | null; after: number | null;
+    during_minus_pre: number | null; after_minus_pre: number | null;
+  }[];
+}
+
+export interface BriefResponse {
+  festival: Festival;
+  en: string;
+  hi: string;
+  source: "llm" | "template";
+  numbers_validated: boolean;
+}
+
 async function get<T>(path: string): Promise<T> {
   const res = await fetch(`${BASE}${path}`);
   if (!res.ok) throw new Error(`${res.status}`);
@@ -32,6 +92,8 @@ async function get<T>(path: string): Promise<T> {
 export const api = {
   ghats: () => get<GhatsResponse>("/api/ghats"),
   summary: () => get<Summary>("/api/summary"),
-  // TODO: replace `unknown` with the ranking type once scoring.py is implemented.
-  ranking: (festival: Festival) => get<{ festival: Festival; ranking: unknown[] }>(`/api/ranking?festival=${festival}`),
+  ranking: (festival: Festival) => get<RankingResponse>(`/api/ranking?festival=${festival}`),
+  ghat: (site: string, festival: Festival) =>
+    get<GhatDetail>(`/api/ghat?site=${encodeURIComponent(site)}&festival=${festival}`),
+  brief: (festival: Festival) => get<BriefResponse>(`/api/brief?festival=${festival}`),
 };

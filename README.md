@@ -34,11 +34,16 @@ Copy `.env.example` to `backend/.env` only if you want an LLM-written brief. Wit
 ## Status
 | Works | Not yet |
 |---|---|
-| Data loading and row classification (measured, below detection, missing) | Ranking, impact and recovery scoring |
-| Golden tests reproducing the problem-statement numbers | Ghat detail page and charts |
-| Class B limits and breach severity | Bilingual brief |
-| API: health, summary, ghats | Stretch: test priority, robustness toggle |
+| Data loading and row classification (measured, below detection, missing) | Ghat detail page with charts (API `/api/ghat` is ready) |
+| Golden tests reproducing the problem-statement numbers | Data and limits page in the UI |
+| Class B limits and breach severity | Native-speaker sign-off on the Hindi brief |
+| Ranking per festival with reason, confidence, impact, recovery, test priority and source pages | LLM-written brief tested with a real key (template brief is the default) |
+| API: health, summary, ghats, ranking, ghat detail, brief | Robustness toggle |
+| Bilingual brief (template + number-validated optional LLM), 150-word cap | Numbers spot-checked against the PDFs (`docs/FACTCHECK.md`) |
+| Ranked list and brief in the UI, 72 backend tests passing | |
 | Deploy config for Render and Vercel | |
+
+"Back to pre level" is never shown as clean: a ghat whose water is no worse a week later can still be above the limits (DECISIONS D-15, D-21).
 
 _Update this table before submitting. Honesty scores better than a hidden gap._
 

@@ -5,7 +5,7 @@ Deploy after the first working build. Order matters: backend first, then fronten
 ## 1. Backend on Render
 1. Push the repo to GitHub (public).
 2. Render dashboard: New, Blueprint, select the repo. It reads `render.yaml`.
-3. Set secrets when prompted: `ALLOWED_ORIGINS` (fill in after step 2 below), `CEREBRAS_API_KEY` or `ANTHROPIC_API_KEY` if you use an LLM. Leave `LLM_PROVIDER=none` to use the template brief.
+3. Set secrets when prompted: `ALLOWED_ORIGINS` (fill in after step 2 below), `GROQ_API_KEY` (and `LLM_PROVIDER=groq`) if you use the LLM. Leave `LLM_PROVIDER=none` to use the template brief.
 4. Wait for the health check at `/api/health`. Note the URL, for example `https://ghat-watch-api.onrender.com`.
 
 Free-tier services sleep after inactivity and take about a minute to wake. Hit `/api/health` a few minutes before any demo.
