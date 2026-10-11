@@ -25,6 +25,7 @@ export interface Summary {
   do_below_5: number;
   bod_readings: number;
   bod_above_3: number;
+  status_counts?: Record<string, number>;
 }
 
 export interface Evidence {
@@ -61,7 +62,7 @@ export interface RankingResponse {
   festival: Festival;
   formula_version: string;
   ranking: RankedGhat[];
-  no_data_sites: { name: string; note?: string }[];
+  no_data_sites: { name: string; bmc_list_2026?: string; note?: string }[];
 }
 
 export interface GhatDetail {
