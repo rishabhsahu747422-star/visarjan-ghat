@@ -15,7 +15,7 @@ Ranks Bhopal's immersion ghats by water-quality risk against CPCB Class B limits
 - the report page behind every number,
 - a short Hindi and English brief the officer can forward.
 
-Details: [PRD](docs/PRD.md) · [Proposed solution](docs/PROPOSED_SOLUTION.md) · [Decisions](docs/DECISIONS.md) · [Fact check](docs/FACTCHECK.md) · [Demo script](docs/DEMO.md) · [Deployment](docs/DEPLOYMENT.md)
+Details: [PRD](docs/PRD.md) · [Proposed solution](docs/PROPOSED_SOLUTION.md) · [Decisions](docs/DECISIONS.md) · [Integration](docs/INTEGRATION.md) · [Fact check](docs/FACTCHECK.md) · [Demo script](docs/DEMO.md) · [Deployment](docs/DEPLOYMENT.md)
 
 ## Run it (5 steps)
 ```bash
@@ -29,6 +29,8 @@ uvicorn app.main:app --reload --port 8000
 cd frontend && npm install && npm run dev
 # 5. Open http://localhost:5173
 ```
+Checks: `cd frontend && npm test` (UI), and with the backend running,
+`API_URL=http://localhost:8000 python scripts/smoke.py` (live API).
 The dev server proxies `/api` to port 8000, so no configuration is needed locally. Copy `.env.example` to `backend/.env` only if you want an LLM-written brief. Without keys the app uses a template brief, which is what the demo runs.
 
 ## Status
@@ -36,13 +38,14 @@ The dev server proxies `/api` to port 8000, so no configuration is needed locall
 |---|---|
 | Data loading and row classification (measured, below detection, missing) | Native-speaker sign-off on the Hindi strings in `backend/app/prompts.py` and `brief.py` |
 | Golden tests reproducing the problem-statement numbers | The ten readings in `docs/FACTCHECK.md` verified against the PDFs (table is written, nothing checked yet) |
-| Class B limits and breach severity | LLM-written brief tested with a real key (template brief is the default and the demo path) |
-| Ranking per festival with reason, confidence, impact, recovery, test priority and source pages | Robustness toggle (re-rank under alternative limits) |
-| API: health, summary, ghats, ranking, ghat detail, brief | Map of the ghats |
-| Bilingual brief (template + number-validated optional LLM), 150-word cap, one action per top ghat | Team name and members in this README |
-| UI: ranked list, quadrant chart, ghat detail with phase charts and every source page, brief, data-and-limits page | |
+| Class B limits and breach severity | Hindi in the UI chrome: only the brief is bilingual, the rest of the interface is English |
+| Ranking per festival with reason, confidence, impact, recovery, test priority and source pages | LLM-written brief tested with a real key (template brief is the default and the demo path) |
+| API: health, summary, ghats, ranking, ghat detail, brief | Robustness toggle (re-rank under alternative limits) |
+| Bilingual brief (template + number-validated optional LLM), 150-word cap, one action per top ghat | Map of the ghats |
+| UI: landing page, overview, ranked list with quadrant chart, ghat detail with phase charts and every source page, brief, methodology | Team name and members in this README |
+| Every number in the UI comes from the API; no scoring runs in the browser (`docs/INTEGRATION.md`) | |
 | Missing data shown as a gap everywhere, never as 0 and never as low risk | |
-| 78 backend tests passing, `npm run build` clean | |
+| 78 backend tests, 6,447 live-API assertions (`scripts/smoke.py`), 11 frontend tests, clean build | |
 | Deploy config for Render and Vercel | |
 
 "Back to pre level" is never shown as clean: a ghat whose water is no worse a week later can still be above the limits (DECISIONS D-15, D-21).

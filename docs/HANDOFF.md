@@ -27,7 +27,9 @@ Durga ranking (v0): Bairagarh 0.527 High (Low confidence, latest data 2024), Sha
 7. CSV files show as modified in `git status` only because of Windows line endings. Do not commit them.
 
 ## Still open (in priority order)
-Items 1, 2, 3, 5, 6 and 9 of the previous list are done (second session, same day). What is left:
+The design branch has since been merged onto the live API; see `docs/INTEGRATION.md` for the 22
+mismatches found and fixed, and D-24 to D-28 in `docs/DECISIONS.md`. The UI is now the design
+branch's screens (React Router, Tailwind, JSX) with every number coming from the API. What is left:
 
 1. **Hindi sign-off by a human.** Every Hindi string in `backend/app/prompts.py` (marked there) and
    `brief.py`. Four new action strings were added (`ACTIONS_HI`) and three existing strings were
@@ -95,4 +97,4 @@ cd frontend && npm run build                 # tsc + vite build, must pass
 ```
 
 ## Files and owners
-`backend/app/scoring.py`, `main.py`, `tests/test_scoring.py`, `data/fixtures/`: A. `backend/app/brief.py`, `prompts.py`, `tests/test_brief.py`, `frontend/src/pages/Brief.*`: D. Other `frontend/src/*`: B, C. `README.md`, `docs/FACTCHECK.md`, `docs/DEMO.md`: E. Log every weight/threshold/definition change in `docs/DECISIONS.md` (next free number: D-24).
+`backend/app/scoring.py`, `main.py`, `tests/test_scoring.py`, `data/fixtures/`: A. `backend/app/brief.py`, `prompts.py`, `tests/test_brief.py`, `frontend/src/pages/Brief.*`: D. Other `frontend/src/*`: B, C. `README.md`, `docs/FACTCHECK.md`, `docs/DEMO.md`: E. Log every weight/threshold/definition change in `docs/DECISIONS.md` (next free number: D-29).

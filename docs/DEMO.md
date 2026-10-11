@@ -8,17 +8,22 @@ a second tab as a fallback.
 
 - [ ] Open `/api/health` on the Render URL and wait for it to answer. The free tier sleeps, and a
       cold start takes about a minute. Do this ten minutes before the demo, not during it.
-- [ ] Open the frontend. Durga is the default festival. Leave it there.
+- [ ] Open the frontend at `/app` (the workspace, not the landing page). Durga is the default
+      festival. Leave it there.
 - [ ] Zoom the browser to 125% for the projector. Check the ranked list fits without scrolling.
 - [ ] `LLM_PROVIDER=none` on the server, so the brief is the template and cannot fail live.
 - [ ] Have a phone ready if anyone asks about mobile.
 
-Deep links, if you would rather jump than click:
+Deep links, if you would rather jump than click (the festival toggle lives in the workspace
+header, so it is not in the URL):
 
-- Ranking: `#/ranking?festival=Durga`
-- Bairagarh detail: `#/detail/Bairagarh%20(Sant%20Hirdaram)%20kund?festival=Durga`
-- Brief: `#/brief?festival=Durga`
-- Data and limits: `#/gaps?festival=Durga`
+- Landing page: `/`
+- Overview: `/app`
+- Ranked list: `/app/rankings`
+- Bairagarh detail: `/app/ghat/bairagarh-sant-hirdaram-kund`
+- Arch Bridge, the untested ghat: `/app/ghat/arch-bridge-ghat`
+- Brief: `/app/brief`
+- Methodology and limits: `/app/methodology`
 
 ## The 6-minute walkthrough
 
@@ -30,26 +35,26 @@ Deep links, if you would rather jump than click:
 > page PDFs that nobody lines up against the legal limits. So the decision gets made from memory.
 > Here is one number from those PDFs: dissolved oxygen read zero at Bairagarh kund.
 
-**0:45 — The ranked list.** Point at the top line, not the whole screen.
+**0:45 — The ranked list.** Open **Rankings**. Point at the top line, not the whole screen.
 
 > Seven ghats, ranked for Durga against CPCB Class B, the outdoor bathing standard. Bairagarh is
 > first. The reason is in plain words underneath: DO 0 against a limit of 5, BOD 9.4 against a
 > limit of 3. Beside it is a confidence badge, and Bairagarh's says Low, because the 2025 report
 > has no Durga table for it. We rank it anyway and we say why we are unsure.
 
-Scroll to the quadrant chart.
+Open **Overview** for the quadrant chart.
 
 > This is the part we care about. Across is how polluted the water already was before anyone
 > arrived. Up is how much immersion made it worse. Bairagarh is far to the right and low: the
 > immersion is not the problem there, the water is already bad. That is a different instruction
 > than a ghat sitting high up.
 
-**1:45 — One ghat, with its source page.** Click Bairagarh.
+**1:45 — One ghat, with its source page.** Click the Bairagarh row.
 
-> Before, during and a week after, for each year, against the limit line. The gaps are gaps, not
-> zeros: where the report has no reading, the line breaks and the caption names what is missing.
-> Scroll down and every single number is here with the report year and the PDF page it came from.
-> Page 60 of the 2023 report. You can check us.
+> Before, during and a week after, for each year, against the limit line. Where the report has no
+> reading, the row says "not measured", not zero. Scroll to the evidence log: every reading, the
+> Class B limit it is compared with, whether it is past that limit, and the report page it came
+> from. Page 60 of the 2023 report. You can check us.
 
 **2:45 — Impact and recovery.** Stay on the detail page, impact table.
 
@@ -59,7 +64,7 @@ Scroll to the quadrant chart.
 > immersion. It does not mean clean. 8.2 against a limit of 3 is still far above the limit, and
 > the tool says exactly that, in the list, on this page and in the brief.
 
-**3:45 — The gaps.** Open **Data and limits**.
+**3:45 — The gaps.** Open **Methodology**, and the missing-data register on **Overview**.
 
 > What we are not showing you. Units are not printed in the reports, so we assume the standard
 > ones. Two ghats have no Durga 2025 table. Rani Kamlapati and Kamla Park may be two different
@@ -71,9 +76,10 @@ Scroll to the quadrant chart.
 **4:30 — The brief.** Open **Brief**.
 
 > This is what the officer actually forwards. Under 150 words, English and Hindi, and every number
-> in it was computed by the scoring code and then checked against the computed data before it is
-> shown. Each top ghat ends with one action: test, clear and aerate, or clean first. Switch to
-> Hindi. Copy. It is plain text, so it goes into WhatsApp as it is.
+> in it was computed by the scoring code and then checked against that data before it is shown. The
+> document says which: text source "Template (no model)", numbers checked "Yes". Each top ghat ends
+> with one action: test, clear and aerate, or clean first. Switch to Hindi. Copy. It is plain text,
+> so it goes into WhatsApp as it is.
 
 > There is an optional step where a language model rephrases this. It only ever rephrases. It is
 > handed the computed numbers, and if its text contains a number we did not compute, we throw it
@@ -90,12 +96,12 @@ Scroll to the quadrant chart.
 
 | Time | Screen | Say |
 |---|---|---|
-| 0:00 | Ranking | The officer, the PDFs, DO 0 at Bairagarh. One sentence each. |
-| 0:25 | Ranking, top card | Rank 1, the plain-words reason, the Low confidence badge and why. |
-| 0:45 | Quadrant chart | Already polluted versus made worse by immersion. Bairagarh is already bad. |
-| 1:00 | Bairagarh detail | The phase chart with the limit line, a visible gap, then scroll to a source page. |
-| 1:25 | Brief | 150 words, action per ghat, switch to Hindi, copy. |
-| 1:45 | Data and limits | One line: here is everything we do not know, including a ghat with no data at all. |
+| 0:00 | `/app/rankings` | The officer, the PDFs, DO 0 at Bairagarh. One sentence each. |
+| 0:25 | `/app/rankings`, top row | Rank 1, the plain-words reason, the Low confidence badge and why. |
+| 0:45 | `/app` quadrant chart | Already polluted versus made worse by immersion. Bairagarh is already bad. |
+| 1:00 | `/app/ghat/bairagarh-sant-hirdaram-kund` | Phase chart against the limit, then the evidence log and a source page. |
+| 1:25 | `/app/brief` | 150 words, action per ghat, switch to Hindi, copy. |
+| 1:45 | `/app/rankings`, bottom block | One line: a ghat with no readings at all, kept out of the ranking on purpose. |
 
 Record it twice and keep the better take. Do not narrate the mouse.
 
@@ -115,6 +121,8 @@ Record it twice and keep the better take. Do not narrate the mouse.
 - **Is this a health warning?** No. We compare readings with a published limit and stop there.
 - **Can you predict 20 October?** No. These are past readings, and the tool says so on every page.
 - **Why is a ghat with no data not at the bottom of the list?** It is not in the list at all. It is
-  in a separate "No data" section, because ranking it would mean scoring a gap.
+  in a separate block under the table, because ranking it would mean scoring a gap.
+- **Where is the scoring done?** In the API, once, with tests. The browser only displays what it
+  returns. `docs/INTEGRATION.md` records that, and why.
 - **What does the LLM do?** It rephrases computed numbers, nothing else, and the demo runs without
   it.
