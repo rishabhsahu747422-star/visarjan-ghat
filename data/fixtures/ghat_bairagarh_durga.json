@@ -1,0 +1,30 @@
+{
+  "_fixture": true,
+  "site": "Bairagarh (Sant Hirdaram) kund",
+  "festival": "Durga",
+  "readings": [
+    { "year": 2023, "phase": "pre", "parameter": "pH", "value": 7.5, "status": "measured", "value_as_printed": "7.5", "limit": "6.5 to 8.5", "breach": 0.0, "source_page": 60 },
+    { "year": 2023, "phase": "during", "parameter": "pH", "value": 7.8, "status": "measured", "value_as_printed": "7.8", "limit": "6.5 to 8.5", "breach": 0.0, "source_page": 60 },
+    { "year": 2023, "phase": "after", "parameter": "pH", "value": 8.1, "status": "measured", "value_as_printed": "8.1", "limit": "6.5 to 8.5", "breach": 0.0, "source_page": 60 },
+    { "year": 2023, "phase": "pre", "parameter": "Dissolved oxygen", "value": 0.0, "status": "measured", "value_as_printed": "0.0", "limit": ">= 5 mg/l", "breach": 1.0, "source_page": 60 },
+    { "year": 2023, "phase": "during", "parameter": "Dissolved oxygen", "value": 0.0, "status": "measured", "value_as_printed": "0.0", "limit": ">= 5 mg/l", "breach": 1.0, "source_page": 60 },
+    { "year": 2023, "phase": "after", "parameter": "Dissolved oxygen", "value": 0.0, "status": "measured", "value_as_printed": "0.0", "limit": ">= 5 mg/l", "breach": 1.0, "source_page": 60 },
+    { "year": 2023, "phase": "pre", "parameter": "BOD", "value": 2.0, "status": "measured", "value_as_printed": "2.0", "limit": "<= 3 mg/l", "breach": 0.0, "source_page": 60 },
+    { "year": 2023, "phase": "during", "parameter": "BOD", "value": 4.8, "status": "measured", "value_as_printed": "4.8", "limit": "<= 3 mg/l", "breach": 0.6, "source_page": 60 },
+    { "year": 2023, "phase": "after", "parameter": "BOD", "value": 6.6, "status": "measured", "value_as_printed": "6.6", "limit": "<= 3 mg/l", "breach": 1.0, "source_page": 60 },
+    { "year": 2023, "phase": "pre", "parameter": "COD", "value": 8.0, "status": "measured", "value_as_printed": "8", "limit": null, "breach": null, "source_page": 60 },
+    { "year": 2023, "phase": "during", "parameter": "COD", "value": 16.0, "status": "measured", "value_as_printed": "16", "limit": null, "breach": null, "source_page": 60 },
+    { "year": 2024, "phase": "pre", "parameter": "Dissolved oxygen", "value": 0.0, "status": "measured", "value_as_printed": "0.0", "limit": ">= 5 mg/l", "breach": 1.0, "source_page": 82 },
+    { "year": 2024, "phase": "during", "parameter": "Dissolved oxygen", "value": 0.0, "status": "measured", "value_as_printed": "0.0", "limit": ">= 5 mg/l", "breach": 1.0, "source_page": 82 },
+    { "year": 2024, "phase": "pre", "parameter": "BOD", "value": 3.5, "status": "measured", "value_as_printed": "3.5", "limit": "<= 3 mg/l", "breach": 0.1667, "source_page": 82 },
+    { "year": 2024, "phase": "during", "parameter": "BOD", "value": 5.0, "status": "measured", "value_as_printed": "5", "limit": "<= 3 mg/l", "breach": 0.6667, "source_page": 82 },
+    { "year": 2024, "phase": "pre", "parameter": "Chromium", "value": null, "status": "below_detection", "value_as_printed": "BDL", "limit": null, "breach": null, "source_page": 82 }
+  ],
+  "impact": [
+    { "year": 2023, "parameter": "Dissolved oxygen", "pre": 0.0, "during": 0.0, "after": 0.0, "during_minus_pre": 0.0, "after_minus_pre": 0.0 },
+    { "year": 2023, "parameter": "BOD", "pre": 2.0, "during": 4.8, "after": 6.6, "during_minus_pre": 2.8, "after_minus_pre": 4.6 },
+    { "year": 2023, "parameter": "pH", "pre": 7.5, "during": 7.8, "after": 8.1, "during_minus_pre": 0.3, "after_minus_pre": 0.6 },
+    { "year": 2024, "parameter": "Dissolved oxygen", "pre": 0.0, "during": 0.0, "after": null, "during_minus_pre": 0.0, "after_minus_pre": null },
+    { "year": 2024, "parameter": "BOD", "pre": 3.5, "during": 5.0, "after": null, "during_minus_pre": 1.5, "after_minus_pre": null }
+  ]
+}
