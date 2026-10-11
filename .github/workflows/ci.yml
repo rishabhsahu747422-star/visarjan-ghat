@@ -9,10 +9,17 @@ jobs:
         with: { python-version: "3.12" }
       - run: pip install -r backend/requirements-dev.txt
       - run: cd backend && python -m pytest -q
+      - name: API smoke test against a live server
+        run: |
+          cd backend && uvicorn app.main:app --port 8000 &
+          for i in $(seq 1 30); do curl -sf http://localhost:8000/api/health && break; sleep 1; done
+          API_URL=http://localhost:8000 python scripts/smoke.py
   frontend:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with: { node-version: "20" }
-      - run: cd frontend && npm ci && npm run build
+      - run: cd frontend && npm ci
+      - run: cd frontend && npm run build
+      - run: cd frontend && npm test
