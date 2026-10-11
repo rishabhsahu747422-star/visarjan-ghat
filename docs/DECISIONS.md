@@ -16,6 +16,8 @@
 | D-12 | Risk-level thresholds: High ≥ 0.50, Medium ≥ 0.25, Low < 0.25 | Durga scores: 0.53, 0.40, 0.39, 0.33, 0.28, 0.22, 0.07. Bands give 1 High, 4 Medium, 2 Low — clear separation. | Final |
 | D-13 | during-pre, after-pre, and quadrant y computed only over parameters present in both phases | Ensures apples-to-apples comparison. A parameter measured only at one phase does not distort the delta. | Final |
 | D-14 | "Latest year" = latest year in dataset for that festival, not per-ghat | Bairagarh / Malikhedi Durga → Low confidence because 2025 is missing dataset-wide. | Final |
+| D-15 | `recovery: good` means "no worse than before immersion", not "within limits". API adds `after_severity` (0 = within limits) and `latest_data_year` to each ranked ghat | Bairagarh 2024 had BOD 8.2 mg/l a week after immersion against a limit of 3 and still reads "good". The UI must not call it clean. UI wording: good = "No worse than before immersion", poor = "Worse a week later". | Final |
+| D-16 | `test_priority` = risk_score × data-gap factor (confidence High 1.0, Medium 1.5, Low 2.0); null if risk is null | Points extra testing where risk is high and data is thin. Ranking order still uses risk_score only. | Final |
 
 Add a row for every change to weights, limits or definitions.
 

@@ -1,143 +1,1835 @@
 {
   "_fixture": true,
+  "_note": "Snapshot of live /api/ranking?festival=Durga (v0). Real values; frontend may switch to the live API.",
   "festival": "Durga",
   "formula_version": "v0",
   "ranking": [
     {
-      "rank": 1,
       "site": "Bairagarh (Sant Hirdaram) kund",
       "water_body": "Upper Lake",
-      "risk_score": 0.82,
+      "risk_score": 0.5267,
       "risk_level": "High",
       "quadrant": "already_bad",
-      "baseline_severity": 0.90,
+      "baseline_severity": 0.4987,
       "immersion_damage": 0.08,
-      "recovery": "poor",
-      "confidence": { "level": "Low", "reasons": ["No Durga 2025 data for this ghat"] },
-      "reason": "DO 0.0 mg/l at pre (2023), limit >= 5 mg/l. BOD 6.6 mg/l at after (2023), limit <= 3 mg/l.",
-      "bmc_list_2026": "listed",
-      "test_priority": null,
-      "evidence": [
-        { "year": 2023, "phase": "pre", "parameter": "Dissolved oxygen", "value": 0.0, "status": "measured", "limit": ">= 5 mg/l", "breach": 1.0, "source_page": 60 },
-        { "year": 2023, "phase": "during", "parameter": "BOD", "value": 4.8, "status": "measured", "limit": "<= 3 mg/l", "breach": 0.6, "source_page": 60 },
-        { "year": 2023, "phase": "after", "parameter": "BOD", "value": 6.6, "status": "measured", "limit": "<= 3 mg/l", "breach": 1.0, "source_page": 60 }
-      ]
-    },
-    {
-      "rank": 2,
-      "site": "Khatlapura ghat",
-      "water_body": "Lower Lake",
-      "risk_score": 0.65,
-      "risk_level": "High",
-      "quadrant": "both",
-      "baseline_severity": 0.50,
-      "immersion_damage": 0.20,
-      "recovery": "poor",
-      "confidence": { "level": "High", "reasons": [] },
-      "reason": "DO 3.2 mg/l at during (2025), limit >= 5 mg/l. BOD 8.0 mg/l at during (2025), limit <= 3 mg/l.",
-      "bmc_list_2026": "listed",
-      "test_priority": null,
-      "evidence": [
-        { "year": 2025, "phase": "during", "parameter": "Dissolved oxygen", "value": 3.2, "status": "measured", "limit": ">= 5 mg/l", "breach": 0.36, "source_page": 42 },
-        { "year": 2025, "phase": "during", "parameter": "BOD", "value": 8.0, "status": "measured", "limit": "<= 3 mg/l", "breach": 1.0, "source_page": 42 }
-      ]
-    },
-    {
-      "rank": 3,
-      "site": "Malikhedi kund",
-      "water_body": "Kund",
-      "risk_score": 0.55,
-      "risk_level": "High",
-      "quadrant": "both",
-      "baseline_severity": 0.42,
-      "immersion_damage": 0.15,
-      "recovery": "poor",
-      "confidence": { "level": "Low", "reasons": ["No Durga 2025 data for this ghat"] },
-      "reason": "DO 2.5 mg/l at during (2024), limit >= 5 mg/l. BOD 5.2 mg/l at during (2024), limit <= 3 mg/l.",
-      "bmc_list_2026": "listed",
-      "test_priority": null,
-      "evidence": [
-        { "year": 2024, "phase": "during", "parameter": "Dissolved oxygen", "value": 2.5, "status": "measured", "limit": ">= 5 mg/l", "breach": 0.5, "source_page": 75 },
-        { "year": 2024, "phase": "during", "parameter": "BOD", "value": 5.2, "status": "measured", "limit": "<= 3 mg/l", "breach": 0.7333, "source_page": 75 }
-      ]
-    },
-    {
-      "rank": 4,
-      "site": "Prempura ghat",
-      "water_body": "Upper Lake",
-      "risk_score": 0.48,
-      "risk_level": "Medium",
-      "quadrant": "damaged_by_immersion",
-      "baseline_severity": 0.28,
-      "immersion_damage": 0.25,
-      "recovery": "poor",
-      "confidence": { "level": "High", "reasons": [] },
-      "reason": "DO 4.0 mg/l at during (2025), limit >= 5 mg/l. BOD 6.0 mg/l at during (2025), limit <= 3 mg/l.",
-      "bmc_list_2026": "listed",
-      "test_priority": null,
-      "evidence": [
-        { "year": 2025, "phase": "during", "parameter": "Dissolved oxygen", "value": 4.0, "status": "measured", "limit": ">= 5 mg/l", "breach": 0.2, "source_page": 50 },
-        { "year": 2025, "phase": "during", "parameter": "BOD", "value": 6.0, "status": "measured", "limit": "<= 3 mg/l", "breach": 1.0, "source_page": 50 }
-      ]
-    },
-    {
-      "rank": 5,
-      "site": "Rani Kamlapati ghat / Kamla Park kund",
-      "water_body": "Lower Lake",
-      "risk_score": 0.42,
-      "risk_level": "Medium",
-      "quadrant": "already_bad",
-      "baseline_severity": 0.38,
-      "immersion_damage": 0.04,
-      "recovery": "unknown",
-      "confidence": { "level": "Medium", "reasons": ["Site name match confidence is medium"] },
-      "reason": "BOD 5.5 mg/l at pre (2025), limit <= 3 mg/l. DO 4.5 mg/l at pre (2025), limit >= 5 mg/l.",
-      "bmc_list_2026": "not_listed",
-      "test_priority": null,
-      "evidence": [
-        { "year": 2025, "phase": "pre", "parameter": "BOD", "value": 5.5, "status": "measured", "limit": "<= 3 mg/l", "breach": 0.8333, "source_page": 44 },
-        { "year": 2025, "phase": "pre", "parameter": "Dissolved oxygen", "value": 4.5, "status": "measured", "limit": ">= 5 mg/l", "breach": 0.1, "source_page": 44 }
-      ]
-    },
-    {
-      "rank": 6,
-      "site": "Hathaikheda dam / kund",
-      "water_body": "Hathaikheda dam",
-      "risk_score": 0.35,
-      "risk_level": "Medium",
-      "quadrant": "stable",
-      "baseline_severity": 0.22,
-      "immersion_damage": 0.05,
       "recovery": "good",
-      "confidence": { "level": "High", "reasons": [] },
-      "reason": "BOD 4.0 mg/l at during (2025), limit <= 3 mg/l. DO 4.8 mg/l at during (2025), limit >= 5 mg/l.",
+      "after_severity": 0.4587,
+      "latest_data_year": 2024,
+      "confidence": {
+        "level": "Low",
+        "reasons": [
+          "No Durga 2025 data for this ghat"
+        ]
+      },
+      "reason": "DO 0.0 mg/l at pre (2023), limit >= 5.0 mg/l. BOD 9.2 mg/l at pre (2023), limit <= 3.0 mg/l.",
       "bmc_list_2026": "listed",
-      "test_priority": null,
+      "test_priority": 1.0533,
       "evidence": [
-        { "year": 2025, "phase": "during", "parameter": "BOD", "value": 4.0, "status": "measured", "limit": "<= 3 mg/l", "breach": 0.3333, "source_page": 48 },
-        { "year": 2025, "phase": "during", "parameter": "Dissolved oxygen", "value": 4.8, "status": "measured", "limit": ">= 5 mg/l", "breach": 0.04, "source_page": 48 }
-      ]
+        {
+          "year": 2023,
+          "phase": "pre",
+          "parameter": "Dissolved oxygen",
+          "value": 0.0,
+          "status": "measured",
+          "limit": ">= 5.0 mg/l",
+          "breach": 1.0,
+          "source_page": 60
+        },
+        {
+          "year": 2023,
+          "phase": "during",
+          "parameter": "Dissolved oxygen",
+          "value": 0.0,
+          "status": "measured",
+          "limit": ">= 5.0 mg/l",
+          "breach": 1.0,
+          "source_page": 60
+        },
+        {
+          "year": 2023,
+          "phase": "after",
+          "parameter": "Dissolved oxygen",
+          "value": 4.2,
+          "status": "measured",
+          "limit": ">= 5.0 mg/l",
+          "breach": 0.16,
+          "source_page": 60
+        },
+        {
+          "year": 2023,
+          "phase": "pre",
+          "parameter": "BOD",
+          "value": 9.2,
+          "status": "measured",
+          "limit": "<= 3.0 mg/l",
+          "breach": 1.0,
+          "source_page": 60
+        },
+        {
+          "year": 2023,
+          "phase": "during",
+          "parameter": "BOD",
+          "value": 9.0,
+          "status": "measured",
+          "limit": "<= 3.0 mg/l",
+          "breach": 1.0,
+          "source_page": 60
+        },
+        {
+          "year": 2023,
+          "phase": "after",
+          "parameter": "BOD",
+          "value": 9.4,
+          "status": "measured",
+          "limit": "<= 3.0 mg/l",
+          "breach": 1.0,
+          "source_page": 60
+        },
+        {
+          "year": 2023,
+          "phase": "pre",
+          "parameter": "pH",
+          "value": 7.32,
+          "status": "measured",
+          "limit": "6.5 to 8.5",
+          "breach": 0.0,
+          "source_page": 60
+        },
+        {
+          "year": 2023,
+          "phase": "during",
+          "parameter": "pH",
+          "value": 7.55,
+          "status": "measured",
+          "limit": "6.5 to 8.5",
+          "breach": 0.0,
+          "source_page": 60
+        },
+        {
+          "year": 2023,
+          "phase": "after",
+          "parameter": "pH",
+          "value": 7.81,
+          "status": "measured",
+          "limit": "6.5 to 8.5",
+          "breach": 0.0,
+          "source_page": 60
+        },
+        {
+          "year": 2024,
+          "phase": "pre",
+          "parameter": "Dissolved oxygen",
+          "value": 4.2,
+          "status": "measured",
+          "limit": ">= 5.0 mg/l",
+          "breach": 0.16,
+          "source_page": 25
+        },
+        {
+          "year": 2024,
+          "phase": "during",
+          "parameter": "Dissolved oxygen",
+          "value": 2.2,
+          "status": "measured",
+          "limit": ">= 5.0 mg/l",
+          "breach": 0.56,
+          "source_page": 25
+        },
+        {
+          "year": 2024,
+          "phase": "after",
+          "parameter": "Dissolved oxygen",
+          "value": 2.4,
+          "status": "measured",
+          "limit": ">= 5.0 mg/l",
+          "breach": 0.52,
+          "source_page": 25
+        },
+        {
+          "year": 2024,
+          "phase": "pre",
+          "parameter": "BOD",
+          "value": 6.0,
+          "status": "measured",
+          "limit": "<= 3.0 mg/l",
+          "breach": 1.0,
+          "source_page": 25
+        },
+        {
+          "year": 2024,
+          "phase": "during",
+          "parameter": "BOD",
+          "value": 8.0,
+          "status": "measured",
+          "limit": "<= 3.0 mg/l",
+          "breach": 1.0,
+          "source_page": 25
+        },
+        {
+          "year": 2024,
+          "phase": "after",
+          "parameter": "BOD",
+          "value": 8.2,
+          "status": "measured",
+          "limit": "<= 3.0 mg/l",
+          "breach": 1.0,
+          "source_page": 25
+        },
+        {
+          "year": 2024,
+          "phase": "pre",
+          "parameter": "pH",
+          "value": 7.03,
+          "status": "measured",
+          "limit": "6.5 to 8.5",
+          "breach": 0.0,
+          "source_page": 25
+        },
+        {
+          "year": 2024,
+          "phase": "during",
+          "parameter": "pH",
+          "value": 6.87,
+          "status": "measured",
+          "limit": "6.5 to 8.5",
+          "breach": 0.0,
+          "source_page": 25
+        },
+        {
+          "year": 2024,
+          "phase": "after",
+          "parameter": "pH",
+          "value": 7.24,
+          "status": "measured",
+          "limit": "6.5 to 8.5",
+          "breach": 0.0,
+          "source_page": 25
+        }
+      ],
+      "rank": 1
     },
     {
-      "rank": 7,
       "site": "Shahpura lake ghat",
       "water_body": "Shahpura Lake",
-      "risk_score": 0.30,
+      "risk_score": 0.4019,
       "risk_level": "Medium",
-      "quadrant": "stable",
-      "baseline_severity": 0.20,
-      "immersion_damage": 0.06,
+      "quadrant": "already_bad",
+      "baseline_severity": 0.4233,
+      "immersion_damage": 0.0067,
       "recovery": "good",
-      "confidence": { "level": "High", "reasons": [] },
-      "reason": "BOD 3.8 mg/l at during (2025), limit <= 3 mg/l. DO 5.2 mg/l at pre (2025), limit >= 5 mg/l.",
+      "after_severity": 0.3573,
+      "latest_data_year": 2025,
+      "confidence": {
+        "level": "High",
+        "reasons": []
+      },
+      "reason": "BOD 6.4 mg/l at pre (2023), limit <= 3.0 mg/l. DO 2.5 mg/l at pre (2025), limit >= 5.0 mg/l.",
       "bmc_list_2026": "not_listed",
-      "test_priority": null,
+      "test_priority": 0.4019,
       "evidence": [
-        { "year": 2025, "phase": "during", "parameter": "BOD", "value": 3.8, "status": "measured", "limit": "<= 3 mg/l", "breach": 0.2667, "source_page": 46 }
-      ]
+        {
+          "year": 2023,
+          "phase": "pre",
+          "parameter": "Dissolved oxygen",
+          "value": 4.5,
+          "status": "measured",
+          "limit": ">= 5.0 mg/l",
+          "breach": 0.1,
+          "source_page": 60
+        },
+        {
+          "year": 2023,
+          "phase": "during",
+          "parameter": "Dissolved oxygen",
+          "value": 4.0,
+          "status": "measured",
+          "limit": ">= 5.0 mg/l",
+          "breach": 0.2,
+          "source_page": 60
+        },
+        {
+          "year": 2023,
+          "phase": "after",
+          "parameter": "Dissolved oxygen",
+          "value": 5.0,
+          "status": "measured",
+          "limit": ">= 5.0 mg/l",
+          "breach": 0.0,
+          "source_page": 60
+        },
+        {
+          "year": 2023,
+          "phase": "pre",
+          "parameter": "BOD",
+          "value": 6.4,
+          "status": "measured",
+          "limit": "<= 3.0 mg/l",
+          "breach": 1.0,
+          "source_page": 60
+        },
+        {
+          "year": 2023,
+          "phase": "during",
+          "parameter": "BOD",
+          "value": 6.8,
+          "status": "measured",
+          "limit": "<= 3.0 mg/l",
+          "breach": 1.0,
+          "source_page": 60
+        },
+        {
+          "year": 2023,
+          "phase": "after",
+          "parameter": "BOD",
+          "value": 7.8,
+          "status": "measured",
+          "limit": "<= 3.0 mg/l",
+          "breach": 1.0,
+          "source_page": 60
+        },
+        {
+          "year": 2023,
+          "phase": "pre",
+          "parameter": "pH",
+          "value": 7.35,
+          "status": "measured",
+          "limit": "6.5 to 8.5",
+          "breach": 0.0,
+          "source_page": 60
+        },
+        {
+          "year": 2023,
+          "phase": "during",
+          "parameter": "pH",
+          "value": 7.73,
+          "status": "measured",
+          "limit": "6.5 to 8.5",
+          "breach": 0.0,
+          "source_page": 60
+        },
+        {
+          "year": 2023,
+          "phase": "after",
+          "parameter": "pH",
+          "value": 7.76,
+          "status": "measured",
+          "limit": "6.5 to 8.5",
+          "breach": 0.0,
+          "source_page": 60
+        },
+        {
+          "year": 2024,
+          "phase": "pre",
+          "parameter": "Dissolved oxygen",
+          "value": 6.8,
+          "status": "measured",
+          "limit": ">= 5.0 mg/l",
+          "breach": 0.0,
+          "source_page": 26
+        },
+        {
+          "year": 2024,
+          "phase": "during",
+          "parameter": "Dissolved oxygen",
+          "value": 5.4,
+          "status": "measured",
+          "limit": ">= 5.0 mg/l",
+          "breach": 0.0,
+          "source_page": 26
+        },
+        {
+          "year": 2024,
+          "phase": "after",
+          "parameter": "Dissolved oxygen",
+          "value": 3.8,
+          "status": "measured",
+          "limit": ">= 5.0 mg/l",
+          "breach": 0.24,
+          "source_page": 26
+        },
+        {
+          "year": 2024,
+          "phase": "pre",
+          "parameter": "BOD",
+          "value": 10.8,
+          "status": "measured",
+          "limit": "<= 3.0 mg/l",
+          "breach": 1.0,
+          "source_page": 26
+        },
+        {
+          "year": 2024,
+          "phase": "during",
+          "parameter": "BOD",
+          "value": 11.2,
+          "status": "measured",
+          "limit": "<= 3.0 mg/l",
+          "breach": 1.0,
+          "source_page": 26
+        },
+        {
+          "year": 2024,
+          "phase": "after",
+          "parameter": "BOD",
+          "value": 11.6,
+          "status": "measured",
+          "limit": "<= 3.0 mg/l",
+          "breach": 1.0,
+          "source_page": 26
+        },
+        {
+          "year": 2024,
+          "phase": "pre",
+          "parameter": "pH",
+          "value": 7.36,
+          "status": "measured",
+          "limit": "6.5 to 8.5",
+          "breach": 0.0,
+          "source_page": 26
+        },
+        {
+          "year": 2024,
+          "phase": "during",
+          "parameter": "pH",
+          "value": 7.35,
+          "status": "measured",
+          "limit": "6.5 to 8.5",
+          "breach": 0.0,
+          "source_page": 26
+        },
+        {
+          "year": 2024,
+          "phase": "after",
+          "parameter": "pH",
+          "value": 7.53,
+          "status": "measured",
+          "limit": "6.5 to 8.5",
+          "breach": 0.0,
+          "source_page": 26
+        },
+        {
+          "year": 2025,
+          "phase": "pre",
+          "parameter": "Dissolved oxygen",
+          "value": 2.5,
+          "status": "measured",
+          "limit": ">= 5.0 mg/l",
+          "breach": 0.5,
+          "source_page": 65
+        },
+        {
+          "year": 2025,
+          "phase": "during",
+          "parameter": "Dissolved oxygen",
+          "value": 2.8,
+          "status": "measured",
+          "limit": ">= 5.0 mg/l",
+          "breach": 0.44,
+          "source_page": 65
+        },
+        {
+          "year": 2025,
+          "phase": "after",
+          "parameter": "Dissolved oxygen",
+          "value": 7.4,
+          "status": "measured",
+          "limit": ">= 5.0 mg/l",
+          "breach": 0.0,
+          "source_page": 65
+        },
+        {
+          "year": 2025,
+          "phase": "pre",
+          "parameter": "BOD",
+          "value": 6.8,
+          "status": "measured",
+          "limit": "<= 3.0 mg/l",
+          "breach": 1.0,
+          "source_page": 65
+        },
+        {
+          "year": 2025,
+          "phase": "during",
+          "parameter": "BOD",
+          "value": 11.4,
+          "status": "measured",
+          "limit": "<= 3.0 mg/l",
+          "breach": 1.0,
+          "source_page": 65
+        },
+        {
+          "year": 2025,
+          "phase": "after",
+          "parameter": "BOD",
+          "value": 10.4,
+          "status": "measured",
+          "limit": "<= 3.0 mg/l",
+          "breach": 1.0,
+          "source_page": 65
+        },
+        {
+          "year": 2025,
+          "phase": "pre",
+          "parameter": "pH",
+          "value": 7.88,
+          "status": "measured",
+          "limit": "6.5 to 8.5",
+          "breach": 0.0,
+          "source_page": 65
+        },
+        {
+          "year": 2025,
+          "phase": "during",
+          "parameter": "pH",
+          "value": 7.36,
+          "status": "measured",
+          "limit": "6.5 to 8.5",
+          "breach": 0.0,
+          "source_page": 65
+        },
+        {
+          "year": 2025,
+          "phase": "after",
+          "parameter": "pH",
+          "value": 7.35,
+          "status": "measured",
+          "limit": "6.5 to 8.5",
+          "breach": 0.0,
+          "source_page": 65
+        }
+      ],
+      "rank": 2
+    },
+    {
+      "site": "Rani Kamlapati ghat / Kamla Park kund",
+      "water_body": "Lower Lake (as printed in Durga tables)",
+      "risk_score": 0.3913,
+      "risk_level": "Medium",
+      "quadrant": "already_bad",
+      "baseline_severity": 0.4033,
+      "immersion_damage": 0.01,
+      "recovery": "good",
+      "after_severity": 0.3467,
+      "latest_data_year": 2025,
+      "confidence": {
+        "level": "Medium",
+        "reasons": [
+          "Site name match confidence is medium"
+        ]
+      },
+      "reason": "BOD 8.8 mg/l at pre (2023), limit <= 3.0 mg/l. DO 2.4 mg/l at during (2025), limit >= 5.0 mg/l.",
+      "bmc_list_2026": "not_listed",
+      "test_priority": 0.587,
+      "evidence": [
+        {
+          "year": 2023,
+          "phase": "pre",
+          "parameter": "Dissolved oxygen",
+          "value": 6.2,
+          "status": "measured",
+          "limit": ">= 5.0 mg/l",
+          "breach": 0.0,
+          "source_page": 59
+        },
+        {
+          "year": 2023,
+          "phase": "during",
+          "parameter": "Dissolved oxygen",
+          "value": 6.0,
+          "status": "measured",
+          "limit": ">= 5.0 mg/l",
+          "breach": 0.0,
+          "source_page": 59
+        },
+        {
+          "year": 2023,
+          "phase": "after",
+          "parameter": "Dissolved oxygen",
+          "value": 6.5,
+          "status": "measured",
+          "limit": ">= 5.0 mg/l",
+          "breach": 0.0,
+          "source_page": 59
+        },
+        {
+          "year": 2023,
+          "phase": "pre",
+          "parameter": "BOD",
+          "value": 8.8,
+          "status": "measured",
+          "limit": "<= 3.0 mg/l",
+          "breach": 1.0,
+          "source_page": 59
+        },
+        {
+          "year": 2023,
+          "phase": "during",
+          "parameter": "BOD",
+          "value": 8.4,
+          "status": "measured",
+          "limit": "<= 3.0 mg/l",
+          "breach": 1.0,
+          "source_page": 59
+        },
+        {
+          "year": 2023,
+          "phase": "after",
+          "parameter": "BOD",
+          "value": 8.6,
+          "status": "measured",
+          "limit": "<= 3.0 mg/l",
+          "breach": 1.0,
+          "source_page": 59
+        },
+        {
+          "year": 2023,
+          "phase": "pre",
+          "parameter": "pH",
+          "value": 8.07,
+          "status": "measured",
+          "limit": "6.5 to 8.5",
+          "breach": 0.0,
+          "source_page": 59
+        },
+        {
+          "year": 2023,
+          "phase": "during",
+          "parameter": "pH",
+          "value": 7.63,
+          "status": "measured",
+          "limit": "6.5 to 8.5",
+          "breach": 0.0,
+          "source_page": 59
+        },
+        {
+          "year": 2023,
+          "phase": "after",
+          "parameter": "pH",
+          "value": 7.54,
+          "status": "measured",
+          "limit": "6.5 to 8.5",
+          "breach": 0.0,
+          "source_page": 59
+        },
+        {
+          "year": 2024,
+          "phase": "pre",
+          "parameter": "Dissolved oxygen",
+          "value": 7.5,
+          "status": "measured",
+          "limit": ">= 5.0 mg/l",
+          "breach": 0.0,
+          "source_page": 24
+        },
+        {
+          "year": 2024,
+          "phase": "during",
+          "parameter": "Dissolved oxygen",
+          "value": 6.4,
+          "status": "measured",
+          "limit": ">= 5.0 mg/l",
+          "breach": 0.0,
+          "source_page": 24
+        },
+        {
+          "year": 2024,
+          "phase": "after",
+          "parameter": "Dissolved oxygen",
+          "value": 6.5,
+          "status": "measured",
+          "limit": ">= 5.0 mg/l",
+          "breach": 0.0,
+          "source_page": 24
+        },
+        {
+          "year": 2024,
+          "phase": "pre",
+          "parameter": "BOD",
+          "value": 5.6,
+          "status": "measured",
+          "limit": "<= 3.0 mg/l",
+          "breach": 0.8667,
+          "source_page": 24
+        },
+        {
+          "year": 2024,
+          "phase": "during",
+          "parameter": "BOD",
+          "value": 5.8,
+          "status": "measured",
+          "limit": "<= 3.0 mg/l",
+          "breach": 0.9333,
+          "source_page": 24
+        },
+        {
+          "year": 2024,
+          "phase": "after",
+          "parameter": "BOD",
+          "value": 6.0,
+          "status": "measured",
+          "limit": "<= 3.0 mg/l",
+          "breach": 1.0,
+          "source_page": 24
+        },
+        {
+          "year": 2024,
+          "phase": "pre",
+          "parameter": "pH",
+          "value": 7.48,
+          "status": "measured",
+          "limit": "6.5 to 8.5",
+          "breach": 0.0,
+          "source_page": 24
+        },
+        {
+          "year": 2024,
+          "phase": "during",
+          "parameter": "pH",
+          "value": 7.7,
+          "status": "measured",
+          "limit": "6.5 to 8.5",
+          "breach": 0.0,
+          "source_page": 24
+        },
+        {
+          "year": 2024,
+          "phase": "after",
+          "parameter": "pH",
+          "value": 7.75,
+          "status": "measured",
+          "limit": "6.5 to 8.5",
+          "breach": 0.0,
+          "source_page": 24
+        },
+        {
+          "year": 2025,
+          "phase": "pre",
+          "parameter": "Dissolved oxygen",
+          "value": 2.5,
+          "status": "measured",
+          "limit": ">= 5.0 mg/l",
+          "breach": 0.5,
+          "source_page": 64
+        },
+        {
+          "year": 2025,
+          "phase": "during",
+          "parameter": "Dissolved oxygen",
+          "value": 2.4,
+          "status": "measured",
+          "limit": ">= 5.0 mg/l",
+          "breach": 0.52,
+          "source_page": 64
+        },
+        {
+          "year": 2025,
+          "phase": "after",
+          "parameter": "Dissolved oxygen",
+          "value": 2.6,
+          "status": "measured",
+          "limit": ">= 5.0 mg/l",
+          "breach": 0.48,
+          "source_page": 64
+        },
+        {
+          "year": 2025,
+          "phase": "pre",
+          "parameter": "BOD",
+          "value": 6.8,
+          "status": "measured",
+          "limit": "<= 3.0 mg/l",
+          "breach": 1.0,
+          "source_page": 64
+        },
+        {
+          "year": 2025,
+          "phase": "during",
+          "parameter": "BOD",
+          "value": 8.8,
+          "status": "measured",
+          "limit": "<= 3.0 mg/l",
+          "breach": 1.0,
+          "source_page": 64
+        },
+        {
+          "year": 2025,
+          "phase": "after",
+          "parameter": "BOD",
+          "value": 4.8,
+          "status": "measured",
+          "limit": "<= 3.0 mg/l",
+          "breach": 0.6,
+          "source_page": 64
+        },
+        {
+          "year": 2025,
+          "phase": "pre",
+          "parameter": "pH",
+          "value": 7.92,
+          "status": "measured",
+          "limit": "6.5 to 8.5",
+          "breach": 0.0,
+          "source_page": 64
+        },
+        {
+          "year": 2025,
+          "phase": "during",
+          "parameter": "pH",
+          "value": 7.85,
+          "status": "measured",
+          "limit": "6.5 to 8.5",
+          "breach": 0.0,
+          "source_page": 64
+        },
+        {
+          "year": 2025,
+          "phase": "after",
+          "parameter": "pH",
+          "value": 7.38,
+          "status": "measured",
+          "limit": "6.5 to 8.5",
+          "breach": 0.0,
+          "source_page": 64
+        }
+      ],
+      "rank": 3
+    },
+    {
+      "site": "Malikhedi kund",
+      "water_body": "Kund",
+      "risk_score": 0.3295,
+      "risk_level": "Medium",
+      "quadrant": "already_bad",
+      "baseline_severity": 0.364,
+      "immersion_damage": 0.008,
+      "recovery": "good",
+      "after_severity": 0.32,
+      "latest_data_year": 2024,
+      "confidence": {
+        "level": "Low",
+        "reasons": [
+          "No Durga 2025 data for this ghat"
+        ]
+      },
+      "reason": "BOD 6.8 mg/l at pre (2023), limit <= 3.0 mg/l. DO 4.0 mg/l at after (2024), limit >= 5.0 mg/l.",
+      "bmc_list_2026": "listed",
+      "test_priority": 0.6589,
+      "evidence": [
+        {
+          "year": 2023,
+          "phase": "pre",
+          "parameter": "Dissolved oxygen",
+          "value": 4.6,
+          "status": "measured",
+          "limit": ">= 5.0 mg/l",
+          "breach": 0.08,
+          "source_page": 61
+        },
+        {
+          "year": 2023,
+          "phase": "during",
+          "parameter": "Dissolved oxygen",
+          "value": 4.3,
+          "status": "measured",
+          "limit": ">= 5.0 mg/l",
+          "breach": 0.14,
+          "source_page": 61
+        },
+        {
+          "year": 2023,
+          "phase": "after",
+          "parameter": "Dissolved oxygen",
+          "value": 10.4,
+          "status": "measured",
+          "limit": ">= 5.0 mg/l",
+          "breach": 0.0,
+          "source_page": 61
+        },
+        {
+          "year": 2023,
+          "phase": "pre",
+          "parameter": "BOD",
+          "value": 6.8,
+          "status": "measured",
+          "limit": "<= 3.0 mg/l",
+          "breach": 1.0,
+          "source_page": 61
+        },
+        {
+          "year": 2023,
+          "phase": "during",
+          "parameter": "BOD",
+          "value": 6.8,
+          "status": "measured",
+          "limit": "<= 3.0 mg/l",
+          "breach": 1.0,
+          "source_page": 61
+        },
+        {
+          "year": 2023,
+          "phase": "after",
+          "parameter": "BOD",
+          "value": 6.6,
+          "status": "measured",
+          "limit": "<= 3.0 mg/l",
+          "breach": 1.0,
+          "source_page": 61
+        },
+        {
+          "year": 2023,
+          "phase": "pre",
+          "parameter": "pH",
+          "value": 7.57,
+          "status": "measured",
+          "limit": "6.5 to 8.5",
+          "breach": 0.0,
+          "source_page": 61
+        },
+        {
+          "year": 2023,
+          "phase": "during",
+          "parameter": "pH",
+          "value": 7.37,
+          "status": "measured",
+          "limit": "6.5 to 8.5",
+          "breach": 0.0,
+          "source_page": 61
+        },
+        {
+          "year": 2023,
+          "phase": "after",
+          "parameter": "pH",
+          "value": 7.81,
+          "status": "measured",
+          "limit": "6.5 to 8.5",
+          "breach": 0.0,
+          "source_page": 61
+        },
+        {
+          "year": 2024,
+          "phase": "pre",
+          "parameter": "Dissolved oxygen",
+          "value": 4.5,
+          "status": "measured",
+          "limit": ">= 5.0 mg/l",
+          "breach": 0.1,
+          "source_page": 26
+        },
+        {
+          "year": 2024,
+          "phase": "during",
+          "parameter": "Dissolved oxygen",
+          "value": 4.1,
+          "status": "measured",
+          "limit": ">= 5.0 mg/l",
+          "breach": 0.18,
+          "source_page": 26
+        },
+        {
+          "year": 2024,
+          "phase": "after",
+          "parameter": "Dissolved oxygen",
+          "value": 4.0,
+          "status": "measured",
+          "limit": ">= 5.0 mg/l",
+          "breach": 0.2,
+          "source_page": 26
+        },
+        {
+          "year": 2024,
+          "phase": "pre",
+          "parameter": "BOD",
+          "value": 6.8,
+          "status": "measured",
+          "limit": "<= 3.0 mg/l",
+          "breach": 1.0,
+          "source_page": 26
+        },
+        {
+          "year": 2024,
+          "phase": "during",
+          "parameter": "BOD",
+          "value": 5.0,
+          "status": "measured",
+          "limit": "<= 3.0 mg/l",
+          "breach": 0.6667,
+          "source_page": 26
+        },
+        {
+          "year": 2024,
+          "phase": "after",
+          "parameter": "BOD",
+          "value": 5.2,
+          "status": "measured",
+          "limit": "<= 3.0 mg/l",
+          "breach": 0.7333,
+          "source_page": 26
+        },
+        {
+          "year": 2024,
+          "phase": "pre",
+          "parameter": "pH",
+          "value": 7.29,
+          "status": "measured",
+          "limit": "6.5 to 8.5",
+          "breach": 0.0,
+          "source_page": 26
+        },
+        {
+          "year": 2024,
+          "phase": "during",
+          "parameter": "pH",
+          "value": 7.3,
+          "status": "measured",
+          "limit": "6.5 to 8.5",
+          "breach": 0.0,
+          "source_page": 26
+        },
+        {
+          "year": 2024,
+          "phase": "after",
+          "parameter": "pH",
+          "value": 7.01,
+          "status": "measured",
+          "limit": "6.5 to 8.5",
+          "breach": 0.0,
+          "source_page": 26
+        }
+      ],
+      "rank": 4
+    },
+    {
+      "site": "Hathaikheda dam / kund",
+      "water_body": "Hathaikheda dam",
+      "risk_score": 0.2778,
+      "risk_level": "Medium",
+      "quadrant": "already_bad",
+      "baseline_severity": 0.3589,
+      "immersion_damage": 0.0444,
+      "recovery": "good",
+      "after_severity": 0.22,
+      "latest_data_year": 2025,
+      "confidence": {
+        "level": "High",
+        "reasons": []
+      },
+      "reason": "BOD 8.8 mg/l at during (2023), limit <= 3.0 mg/l. pH 9.2 at pre (2024), limit 6.5 to 8.5.",
+      "bmc_list_2026": "listed",
+      "test_priority": 0.2778,
+      "evidence": [
+        {
+          "year": 2023,
+          "phase": "pre",
+          "parameter": "Dissolved oxygen",
+          "value": 6.5,
+          "status": "measured",
+          "limit": ">= 5.0 mg/l",
+          "breach": 0.0,
+          "source_page": 59
+        },
+        {
+          "year": 2023,
+          "phase": "during",
+          "parameter": "Dissolved oxygen",
+          "value": 10.2,
+          "status": "measured",
+          "limit": ">= 5.0 mg/l",
+          "breach": 0.0,
+          "source_page": 59
+        },
+        {
+          "year": 2023,
+          "phase": "after",
+          "parameter": "Dissolved oxygen",
+          "value": 8.6,
+          "status": "measured",
+          "limit": ">= 5.0 mg/l",
+          "breach": 0.0,
+          "source_page": 59
+        },
+        {
+          "year": 2023,
+          "phase": "pre",
+          "parameter": "BOD",
+          "value": 4.0,
+          "status": "measured",
+          "limit": "<= 3.0 mg/l",
+          "breach": 0.3333,
+          "source_page": 59
+        },
+        {
+          "year": 2023,
+          "phase": "during",
+          "parameter": "BOD",
+          "value": 8.8,
+          "status": "measured",
+          "limit": "<= 3.0 mg/l",
+          "breach": 1.0,
+          "source_page": 59
+        },
+        {
+          "year": 2023,
+          "phase": "after",
+          "parameter": "BOD",
+          "value": 2.4,
+          "status": "measured",
+          "limit": "<= 3.0 mg/l",
+          "breach": 0.0,
+          "source_page": 59
+        },
+        {
+          "year": 2023,
+          "phase": "pre",
+          "parameter": "pH",
+          "value": 8.02,
+          "status": "measured",
+          "limit": "6.5 to 8.5",
+          "breach": 0.0,
+          "source_page": 59
+        },
+        {
+          "year": 2023,
+          "phase": "during",
+          "parameter": "pH",
+          "value": 8.02,
+          "status": "measured",
+          "limit": "6.5 to 8.5",
+          "breach": 0.0,
+          "source_page": 59
+        },
+        {
+          "year": 2023,
+          "phase": "after",
+          "parameter": "pH",
+          "value": 8.15,
+          "status": "measured",
+          "limit": "6.5 to 8.5",
+          "breach": 0.0,
+          "source_page": 59
+        },
+        {
+          "year": 2024,
+          "phase": "pre",
+          "parameter": "Dissolved oxygen",
+          "value": 8.6,
+          "status": "measured",
+          "limit": ">= 5.0 mg/l",
+          "breach": 0.0,
+          "source_page": 23
+        },
+        {
+          "year": 2024,
+          "phase": "during",
+          "parameter": "Dissolved oxygen",
+          "value": 5.9,
+          "status": "measured",
+          "limit": ">= 5.0 mg/l",
+          "breach": 0.0,
+          "source_page": 23
+        },
+        {
+          "year": 2024,
+          "phase": "after",
+          "parameter": "Dissolved oxygen",
+          "value": 5.7,
+          "status": "measured",
+          "limit": ">= 5.0 mg/l",
+          "breach": 0.0,
+          "source_page": 23
+        },
+        {
+          "year": 2024,
+          "phase": "pre",
+          "parameter": "BOD",
+          "value": 7.4,
+          "status": "measured",
+          "limit": "<= 3.0 mg/l",
+          "breach": 1.0,
+          "source_page": 23
+        },
+        {
+          "year": 2024,
+          "phase": "during",
+          "parameter": "BOD",
+          "value": 4.4,
+          "status": "measured",
+          "limit": "<= 3.0 mg/l",
+          "breach": 0.4667,
+          "source_page": 23
+        },
+        {
+          "year": 2024,
+          "phase": "after",
+          "parameter": "BOD",
+          "value": 4.6,
+          "status": "measured",
+          "limit": "<= 3.0 mg/l",
+          "breach": 0.5333,
+          "source_page": 23
+        },
+        {
+          "year": 2024,
+          "phase": "pre",
+          "parameter": "pH",
+          "value": 9.2,
+          "status": "measured",
+          "limit": "6.5 to 8.5",
+          "breach": 0.7,
+          "source_page": 23
+        },
+        {
+          "year": 2024,
+          "phase": "during",
+          "parameter": "pH",
+          "value": 7.7,
+          "status": "measured",
+          "limit": "6.5 to 8.5",
+          "breach": 0.0,
+          "source_page": 23
+        },
+        {
+          "year": 2024,
+          "phase": "after",
+          "parameter": "pH",
+          "value": 7.7,
+          "status": "measured",
+          "limit": "6.5 to 8.5",
+          "breach": 0.0,
+          "source_page": 23
+        },
+        {
+          "year": 2025,
+          "phase": "pre",
+          "parameter": "Dissolved oxygen",
+          "value": 8.5,
+          "status": "measured",
+          "limit": ">= 5.0 mg/l",
+          "breach": 0.0,
+          "source_page": 64
+        },
+        {
+          "year": 2025,
+          "phase": "during",
+          "parameter": "Dissolved oxygen",
+          "value": 8.5,
+          "status": "measured",
+          "limit": ">= 5.0 mg/l",
+          "breach": 0.0,
+          "source_page": 64
+        },
+        {
+          "year": 2025,
+          "phase": "after",
+          "parameter": "Dissolved oxygen",
+          "value": 10.8,
+          "status": "measured",
+          "limit": ">= 5.0 mg/l",
+          "breach": 0.0,
+          "source_page": 64
+        },
+        {
+          "year": 2025,
+          "phase": "pre",
+          "parameter": "BOD",
+          "value": 6.8,
+          "status": "measured",
+          "limit": "<= 3.0 mg/l",
+          "breach": 1.0,
+          "source_page": 64
+        },
+        {
+          "year": 2025,
+          "phase": "during",
+          "parameter": "BOD",
+          "value": 8.0,
+          "status": "measured",
+          "limit": "<= 3.0 mg/l",
+          "breach": 1.0,
+          "source_page": 64
+        },
+        {
+          "year": 2025,
+          "phase": "after",
+          "parameter": "BOD",
+          "value": 6.4,
+          "status": "measured",
+          "limit": "<= 3.0 mg/l",
+          "breach": 1.0,
+          "source_page": 64
+        },
+        {
+          "year": 2025,
+          "phase": "pre",
+          "parameter": "pH",
+          "value": 8.14,
+          "status": "measured",
+          "limit": "6.5 to 8.5",
+          "breach": 0.0,
+          "source_page": 64
+        },
+        {
+          "year": 2025,
+          "phase": "during",
+          "parameter": "pH",
+          "value": 8.37,
+          "status": "measured",
+          "limit": "6.5 to 8.5",
+          "breach": 0.0,
+          "source_page": 64
+        },
+        {
+          "year": 2025,
+          "phase": "after",
+          "parameter": "pH",
+          "value": 8.44,
+          "status": "measured",
+          "limit": "6.5 to 8.5",
+          "breach": 0.0,
+          "source_page": 64
+        }
+      ],
+      "rank": 5
+    },
+    {
+      "site": "Khatlapura ghat",
+      "water_body": "Lower Lake",
+      "risk_score": 0.2153,
+      "risk_level": "Low",
+      "quadrant": "stable",
+      "baseline_severity": 0.2511,
+      "immersion_damage": 0.0271,
+      "recovery": "good",
+      "after_severity": 0.1922,
+      "latest_data_year": 2025,
+      "confidence": {
+        "level": "High",
+        "reasons": []
+      },
+      "reason": "BOD 6.4 mg/l at pre (2023), limit <= 3.0 mg/l. DO 4.2 mg/l at during (2023), limit >= 5.0 mg/l.",
+      "bmc_list_2026": "listed",
+      "test_priority": 0.2153,
+      "evidence": [
+        {
+          "year": 2023,
+          "phase": "pre",
+          "parameter": "Dissolved oxygen",
+          "value": 4.5,
+          "status": "measured",
+          "limit": ">= 5.0 mg/l",
+          "breach": 0.1,
+          "source_page": 59
+        },
+        {
+          "year": 2023,
+          "phase": "during",
+          "parameter": "Dissolved oxygen",
+          "value": 4.2,
+          "status": "measured",
+          "limit": ">= 5.0 mg/l",
+          "breach": 0.16,
+          "source_page": 59
+        },
+        {
+          "year": 2023,
+          "phase": "after",
+          "parameter": "Dissolved oxygen",
+          "value": 4.4,
+          "status": "measured",
+          "limit": ">= 5.0 mg/l",
+          "breach": 0.12,
+          "source_page": 59
+        },
+        {
+          "year": 2023,
+          "phase": "pre",
+          "parameter": "BOD",
+          "value": 6.4,
+          "status": "measured",
+          "limit": "<= 3.0 mg/l",
+          "breach": 1.0,
+          "source_page": 59
+        },
+        {
+          "year": 2023,
+          "phase": "after",
+          "parameter": "BOD",
+          "value": 7.8,
+          "status": "measured",
+          "limit": "<= 3.0 mg/l",
+          "breach": 1.0,
+          "source_page": 59
+        },
+        {
+          "year": 2023,
+          "phase": "pre",
+          "parameter": "pH",
+          "value": 7.87,
+          "status": "measured",
+          "limit": "6.5 to 8.5",
+          "breach": 0.0,
+          "source_page": 59
+        },
+        {
+          "year": 2023,
+          "phase": "during",
+          "parameter": "pH",
+          "value": 8.2,
+          "status": "measured",
+          "limit": "6.5 to 8.5",
+          "breach": 0.0,
+          "source_page": 59
+        },
+        {
+          "year": 2023,
+          "phase": "after",
+          "parameter": "pH",
+          "value": 7.46,
+          "status": "measured",
+          "limit": "6.5 to 8.5",
+          "breach": 0.0,
+          "source_page": 59
+        },
+        {
+          "year": 2024,
+          "phase": "pre",
+          "parameter": "Dissolved oxygen",
+          "value": 6.6,
+          "status": "measured",
+          "limit": ">= 5.0 mg/l",
+          "breach": 0.0,
+          "source_page": 24
+        },
+        {
+          "year": 2024,
+          "phase": "during",
+          "parameter": "Dissolved oxygen",
+          "value": 4.5,
+          "status": "measured",
+          "limit": ">= 5.0 mg/l",
+          "breach": 0.1,
+          "source_page": 24
+        },
+        {
+          "year": 2024,
+          "phase": "after",
+          "parameter": "Dissolved oxygen",
+          "value": 4.4,
+          "status": "measured",
+          "limit": ">= 5.0 mg/l",
+          "breach": 0.12,
+          "source_page": 24
+        },
+        {
+          "year": 2024,
+          "phase": "pre",
+          "parameter": "BOD",
+          "value": 7.8,
+          "status": "measured",
+          "limit": "<= 3.0 mg/l",
+          "breach": 1.0,
+          "source_page": 24
+        },
+        {
+          "year": 2024,
+          "phase": "during",
+          "parameter": "BOD",
+          "value": 8.0,
+          "status": "measured",
+          "limit": "<= 3.0 mg/l",
+          "breach": 1.0,
+          "source_page": 24
+        },
+        {
+          "year": 2024,
+          "phase": "after",
+          "parameter": "BOD",
+          "value": 8.4,
+          "status": "measured",
+          "limit": "<= 3.0 mg/l",
+          "breach": 1.0,
+          "source_page": 24
+        },
+        {
+          "year": 2024,
+          "phase": "pre",
+          "parameter": "pH",
+          "value": 8.0,
+          "status": "measured",
+          "limit": "6.5 to 8.5",
+          "breach": 0.0,
+          "source_page": 24
+        },
+        {
+          "year": 2024,
+          "phase": "during",
+          "parameter": "pH",
+          "value": 7.57,
+          "status": "measured",
+          "limit": "6.5 to 8.5",
+          "breach": 0.0,
+          "source_page": 24
+        },
+        {
+          "year": 2024,
+          "phase": "after",
+          "parameter": "pH",
+          "value": 7.4,
+          "status": "measured",
+          "limit": "6.5 to 8.5",
+          "breach": 0.0,
+          "source_page": 24
+        },
+        {
+          "year": 2025,
+          "phase": "pre",
+          "parameter": "Dissolved oxygen",
+          "value": 7.1,
+          "status": "measured",
+          "limit": ">= 5.0 mg/l",
+          "breach": 0.0,
+          "source_page": 64
+        },
+        {
+          "year": 2025,
+          "phase": "during",
+          "parameter": "Dissolved oxygen",
+          "value": 6.2,
+          "status": "measured",
+          "limit": ">= 5.0 mg/l",
+          "breach": 0.0,
+          "source_page": 64
+        },
+        {
+          "year": 2025,
+          "phase": "after",
+          "parameter": "Dissolved oxygen",
+          "value": 6.6,
+          "status": "measured",
+          "limit": ">= 5.0 mg/l",
+          "breach": 0.0,
+          "source_page": 64
+        },
+        {
+          "year": 2025,
+          "phase": "pre",
+          "parameter": "BOD",
+          "value": 4.4,
+          "status": "measured",
+          "limit": "<= 3.0 mg/l",
+          "breach": 0.4667,
+          "source_page": 64
+        },
+        {
+          "year": 2025,
+          "phase": "during",
+          "parameter": "BOD",
+          "value": 4.6,
+          "status": "measured",
+          "limit": "<= 3.0 mg/l",
+          "breach": 0.5333,
+          "source_page": 64
+        },
+        {
+          "year": 2025,
+          "phase": "after",
+          "parameter": "BOD",
+          "value": 3.1,
+          "status": "measured",
+          "limit": "<= 3.0 mg/l",
+          "breach": 0.0333,
+          "source_page": 64
+        },
+        {
+          "year": 2025,
+          "phase": "pre",
+          "parameter": "pH",
+          "value": 8.17,
+          "status": "measured",
+          "limit": "6.5 to 8.5",
+          "breach": 0.0,
+          "source_page": 64
+        },
+        {
+          "year": 2025,
+          "phase": "during",
+          "parameter": "pH",
+          "value": 7.72,
+          "status": "measured",
+          "limit": "6.5 to 8.5",
+          "breach": 0.0,
+          "source_page": 64
+        },
+        {
+          "year": 2025,
+          "phase": "after",
+          "parameter": "pH",
+          "value": 7.81,
+          "status": "measured",
+          "limit": "6.5 to 8.5",
+          "breach": 0.0,
+          "source_page": 64
+        }
+      ],
+      "rank": 6
+    },
+    {
+      "site": "Prempura ghat",
+      "water_body": "Upper Lake",
+      "risk_score": 0.0746,
+      "risk_level": "Low",
+      "quadrant": "stable",
+      "baseline_severity": 0.0778,
+      "immersion_damage": 0.0256,
+      "recovery": "good",
+      "after_severity": 0.0244,
+      "latest_data_year": 2025,
+      "confidence": {
+        "level": "High",
+        "reasons": []
+      },
+      "reason": "BOD 4.8 mg/l at during (2025), limit <= 3.0 mg/l. DO 4.9 mg/l at during (2025), limit >= 5.0 mg/l.",
+      "bmc_list_2026": "listed",
+      "test_priority": 0.0746,
+      "evidence": [
+        {
+          "year": 2023,
+          "phase": "pre",
+          "parameter": "Dissolved oxygen",
+          "value": 5.4,
+          "status": "measured",
+          "limit": ">= 5.0 mg/l",
+          "breach": 0.0,
+          "source_page": 60
+        },
+        {
+          "year": 2023,
+          "phase": "during",
+          "parameter": "Dissolved oxygen",
+          "value": 5.0,
+          "status": "measured",
+          "limit": ">= 5.0 mg/l",
+          "breach": 0.0,
+          "source_page": 60
+        },
+        {
+          "year": 2023,
+          "phase": "after",
+          "parameter": "Dissolved oxygen",
+          "value": 5.7,
+          "status": "measured",
+          "limit": ">= 5.0 mg/l",
+          "breach": 0.0,
+          "source_page": 60
+        },
+        {
+          "year": 2023,
+          "phase": "pre",
+          "parameter": "pH",
+          "value": 7.66,
+          "status": "measured",
+          "limit": "6.5 to 8.5",
+          "breach": 0.0,
+          "source_page": 60
+        },
+        {
+          "year": 2023,
+          "phase": "after",
+          "parameter": "pH",
+          "value": 7.39,
+          "status": "measured",
+          "limit": "6.5 to 8.5",
+          "breach": 0.0,
+          "source_page": 60
+        },
+        {
+          "year": 2024,
+          "phase": "pre",
+          "parameter": "Dissolved oxygen",
+          "value": 7.6,
+          "status": "measured",
+          "limit": ">= 5.0 mg/l",
+          "breach": 0.0,
+          "source_page": 25
+        },
+        {
+          "year": 2024,
+          "phase": "during",
+          "parameter": "Dissolved oxygen",
+          "value": 6.4,
+          "status": "measured",
+          "limit": ">= 5.0 mg/l",
+          "breach": 0.0,
+          "source_page": 25
+        },
+        {
+          "year": 2024,
+          "phase": "after",
+          "parameter": "Dissolved oxygen",
+          "value": 7.6,
+          "status": "measured",
+          "limit": ">= 5.0 mg/l",
+          "breach": 0.0,
+          "source_page": 25
+        },
+        {
+          "year": 2024,
+          "phase": "pre",
+          "parameter": "BOD",
+          "value": 2.4,
+          "status": "measured",
+          "limit": "<= 3.0 mg/l",
+          "breach": 0.0,
+          "source_page": 25
+        },
+        {
+          "year": 2024,
+          "phase": "during",
+          "parameter": "BOD",
+          "value": 2.6,
+          "status": "measured",
+          "limit": "<= 3.0 mg/l",
+          "breach": 0.0,
+          "source_page": 25
+        },
+        {
+          "year": 2024,
+          "phase": "after",
+          "parameter": "BOD",
+          "value": 3.4,
+          "status": "measured",
+          "limit": "<= 3.0 mg/l",
+          "breach": 0.1333,
+          "source_page": 25
+        },
+        {
+          "year": 2024,
+          "phase": "pre",
+          "parameter": "pH",
+          "value": 8.22,
+          "status": "measured",
+          "limit": "6.5 to 8.5",
+          "breach": 0.0,
+          "source_page": 25
+        },
+        {
+          "year": 2024,
+          "phase": "during",
+          "parameter": "pH",
+          "value": 8.02,
+          "status": "measured",
+          "limit": "6.5 to 8.5",
+          "breach": 0.0,
+          "source_page": 25
+        },
+        {
+          "year": 2024,
+          "phase": "after",
+          "parameter": "pH",
+          "value": 8.11,
+          "status": "measured",
+          "limit": "6.5 to 8.5",
+          "breach": 0.0,
+          "source_page": 25
+        },
+        {
+          "year": 2025,
+          "phase": "pre",
+          "parameter": "Dissolved oxygen",
+          "value": 6.6,
+          "status": "measured",
+          "limit": ">= 5.0 mg/l",
+          "breach": 0.0,
+          "source_page": 65
+        },
+        {
+          "year": 2025,
+          "phase": "during",
+          "parameter": "Dissolved oxygen",
+          "value": 4.9,
+          "status": "measured",
+          "limit": ">= 5.0 mg/l",
+          "breach": 0.02,
+          "source_page": 65
+        },
+        {
+          "year": 2025,
+          "phase": "after",
+          "parameter": "Dissolved oxygen",
+          "value": 8.2,
+          "status": "measured",
+          "limit": ">= 5.0 mg/l",
+          "breach": 0.0,
+          "source_page": 65
+        },
+        {
+          "year": 2025,
+          "phase": "pre",
+          "parameter": "BOD",
+          "value": 4.4,
+          "status": "measured",
+          "limit": "<= 3.0 mg/l",
+          "breach": 0.4667,
+          "source_page": 65
+        },
+        {
+          "year": 2025,
+          "phase": "during",
+          "parameter": "BOD",
+          "value": 4.8,
+          "status": "measured",
+          "limit": "<= 3.0 mg/l",
+          "breach": 0.6,
+          "source_page": 65
+        },
+        {
+          "year": 2025,
+          "phase": "after",
+          "parameter": "BOD",
+          "value": 3.2,
+          "status": "measured",
+          "limit": "<= 3.0 mg/l",
+          "breach": 0.0667,
+          "source_page": 65
+        },
+        {
+          "year": 2025,
+          "phase": "pre",
+          "parameter": "pH",
+          "value": 8.25,
+          "status": "measured",
+          "limit": "6.5 to 8.5",
+          "breach": 0.0,
+          "source_page": 65
+        },
+        {
+          "year": 2025,
+          "phase": "during",
+          "parameter": "pH",
+          "value": 8.24,
+          "status": "measured",
+          "limit": "6.5 to 8.5",
+          "breach": 0.0,
+          "source_page": 65
+        },
+        {
+          "year": 2025,
+          "phase": "after",
+          "parameter": "pH",
+          "value": 8.29,
+          "status": "measured",
+          "limit": "6.5 to 8.5",
+          "breach": 0.0,
+          "source_page": 65
+        }
+      ],
+      "rank": 7
     }
   ],
   "no_data_sites": [
-    { "name": "Arch Bridge ghat", "note": "No baseline, test before use" }
+    {
+      "name": "Arch Bridge ghat",
+      "bmc_list_2026": "listed",
+      "note": "In use per news reports, absent from MPPCB data pack. Show as 'no baseline, test before use'."
+    }
   ]
 }

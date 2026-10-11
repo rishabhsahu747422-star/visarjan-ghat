@@ -201,13 +201,17 @@ def impact_recovery(pt_site: dict) -> list[dict]:
     return impacts
 
 
-def _recovery_label(pt_site: dict, dataset_years: list[int]) -> str:
+def _recovery_detail(pt_site: dict, dataset_years: list[int]) -> tuple[str, float | None]:
     """Recovery assessment over matched after/pre parameters.
 
     good  – after_severity <= pre_severity + 0.05
     poor  – after_severity >  pre_severity + 0.05
     unknown – no year has both after and pre for any scored parameter
     Logged as D-11 in DECISIONS.md.
+
+    "good" means NO WORSE THAN BEFORE immersion, not "within limits". The second value is the
+    recency-weighted after-phase severity (0 = within limits) so the UI can show whether the
+    water still breaches the limit a week later (D-15).
     """
     per_year: dict[int, tuple[float, float]] = {}
 
@@ -231,16 +235,22 @@ def _recovery_label(pt_site: dict, dataset_years: list[int]) -> str:
             )
 
     if not per_year:
-        return "unknown"
+        return "unknown", None
 
     rw = _recency_weights(dataset_years, set(per_year.keys()))
     if not rw:
-        return "unknown"
+        return "unknown", None
 
     pre_agg = sum(per_year[y][0] * rw[y] for y in rw)
     after_agg = sum(per_year[y][1] * rw[y] for y in rw)
 
-    return "good" if after_agg <= pre_agg + RECOVERY_TOLERANCE else "poor"
+    label = "good" if after_agg <= pre_agg + RECOVERY_TOLERANCE else "poor"
+    return label, round(after_agg, 4)
+
+
+def _recovery_label(pt_site: dict, dataset_years: list[int]) -> str:
+    """Label only (kept for callers that do not need after_severity)."""
+    return _recovery_detail(pt_site, dataset_years)[0]
 
 
 # ---------------------------------------------------------------------------
@@ -478,6 +488,20 @@ def _risk_level(score: float | None) -> str:
 
 
 # ---------------------------------------------------------------------------
+# test priority (stretch, D-16)
+# ---------------------------------------------------------------------------
+
+DATA_GAP_FACTOR = {"High": 1.0, "Medium": 1.5, "Low": 2.0}
+
+
+def _test_priority(risk: float | None, confidence_level: str) -> float | None:
+    """Where extra testing helps most: risk scaled up when data is thinner. Null if risk is null."""
+    if risk is None:
+        return None
+    return round(risk * DATA_GAP_FACTOR[confidence_level], 4)
+
+
+# ---------------------------------------------------------------------------
 # rank_ghats  (main entry point)
 # ---------------------------------------------------------------------------
 
@@ -534,7 +558,7 @@ def rank_ghats(festival: str) -> dict:
         risk = _risk_score(pt_site, dataset_years)
         conf = _confidence(site, festival, pt_site, smc, latest_year, dataset_years)
         baseline, damage, quad_label = _quadrant(pt_site, dataset_years)
-        recovery = _recovery_label(pt_site, dataset_years)
+        recovery, after_sev = _recovery_detail(pt_site, dataset_years)
         evidence = _build_evidence(pt_site)
         reason = _reason_text(evidence)
         bmc = meta["ghats"].get(site, {}).get("bmc_list_2026", "unknown")
@@ -548,10 +572,12 @@ def rank_ghats(festival: str) -> dict:
             "baseline_severity": round(baseline, 4) if baseline is not None else None,
             "immersion_damage": round(damage, 4) if damage is not None else None,
             "recovery": recovery,
+            "after_severity": after_sev,
+            "latest_data_year": max(pt_site.keys()),
             "confidence": conf,
             "reason": reason,
             "bmc_list_2026": bmc,
-            "test_priority": None,
+            "test_priority": _test_priority(risk, conf["level"]),
             "evidence": evidence,
         })
 

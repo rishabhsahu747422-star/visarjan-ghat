@@ -223,3 +223,41 @@ def test_ghat_detail_shape():
     assert "impact" in detail
     assert detail["site"] == "Bairagarh (Sant Hirdaram) kund"
     assert detail["festival"] == "Durga"
+
+
+# ---------- D-15 / D-16: recovery wording support, latest_data_year, test_priority ----------
+
+
+def _durga():
+    return {g["site"]: g for g in rank_ghats("Durga")["ranking"]}
+
+
+def test_ranking_has_after_severity_and_latest_year():
+    for g in rank_ghats("Durga")["ranking"]:
+        assert "after_severity" in g and "latest_data_year" in g
+        assert g["latest_data_year"] in (2023, 2024, 2025)
+
+
+def test_bairagarh_latest_data_year_is_2024():
+    assert _durga()["Bairagarh (Sant Hirdaram) kund"]["latest_data_year"] == 2024
+
+
+def test_good_recovery_does_not_mean_clean():
+    # Bairagarh is labelled "good" (no worse than pre) but still breaches limits a week later.
+    g = _durga()["Bairagarh (Sant Hirdaram) kund"]
+    assert g["recovery"] == "good"
+    assert g["after_severity"] is not None and g["after_severity"] > 0.3
+
+
+def test_after_severity_null_when_recovery_unknown():
+    for fest in ("Durga", "Ganesh"):
+        for g in rank_ghats(fest)["ranking"]:
+            if g["recovery"] == "unknown":
+                assert g["after_severity"] is None
+
+
+def test_test_priority_scales_with_data_gap():
+    g = _durga()["Bairagarh (Sant Hirdaram) kund"]  # confidence Low -> x2.0
+    assert abs(g["test_priority"] - g["risk_score"] * 2.0) < 1e-3
+    h = _durga()["Prempura ghat"]  # confidence High -> x1.0
+    assert abs(h["test_priority"] - h["risk_score"]) < 1e-3

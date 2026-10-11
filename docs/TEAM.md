@@ -39,6 +39,8 @@ A builds the API to this shape. B, C and D build against it from the fixture, so
       "baseline_severity": 0.9,
       "immersion_damage": 0.1,
       "recovery": "poor",
+      "after_severity": 0.62,
+      "latest_data_year": 2024,
       "confidence": { "level": "Low", "reasons": ["No Durga 2025 table in the report"] },
       "reason": "Plain-words reason built from the numbers below.",
       "bmc_list_2026": "listed",
@@ -52,7 +54,7 @@ A builds the API to this shape. B, C and D build against it from the fixture, so
   "no_data_sites": [ { "name": "Arch Bridge ghat", "note": "No baseline, test before use" } ]
 }
 ```
-Allowed values: `risk_level` Low | Medium | High · `quadrant` already_bad | damaged_by_immersion | both | stable | unknown · `recovery` good | poor | unknown · `confidence.level` High | Medium | Low · `status` measured | below_detection | missing. Any score that cannot be computed is `null`, never 0.
+Allowed values: `risk_level` Low | Medium | High · `quadrant` already_bad | damaged_by_immersion | both | stable | unknown · `recovery` good (= no worse than before immersion, NOT clean) | poor (= worse a week later) | unknown · `confidence.level` High | Medium | Low · `status` measured | below_detection | missing. Any score that cannot be computed is `null`, never 0.
 
 ### `GET /api/ghat?site=<name>&festival=Durga|Ganesh`
 ```json
