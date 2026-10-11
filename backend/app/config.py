@@ -13,6 +13,6 @@ ALLOWED_ORIGINS = [
     o.strip() for o in os.getenv("ALLOWED_ORIGINS", "http://localhost:5173").split(",") if o.strip()
 ]
 
-LLM_PROVIDER = os.getenv("LLM_PROVIDER", "none")  # cerebras | anthropic | none
-CEREBRAS_API_KEY = os.getenv("CEREBRAS_API_KEY", "")
-ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY", "")
+LLM_PROVIDER = os.getenv("LLM_PROVIDER", "none")  # groq | none
+GROQ_API_KEY = os.getenv("GROQ_API_KEY", "")
+GROQ_MODEL = os.getenv("GROQ_MODEL", "openai/gpt-oss-120b")  # any open-weight model Groq serves

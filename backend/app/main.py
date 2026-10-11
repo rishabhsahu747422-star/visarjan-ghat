@@ -5,6 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from . import config
 from .data_loader import list_ghats, load_readings
+from .brief import build_brief
 from .limits import CLASS_B, CONTEXT_ONLY
 from .scoring import rank_ghats, ghat_detail
 
@@ -68,3 +69,13 @@ def ghat(site: str, festival: str = "Durga"):
     if detail is None:
         raise HTTPException(404, f"No data for site '{site}' in {festival}")
     return detail
+
+
+@app.get("/api/brief")
+def brief(festival: str = "Durga"):
+    if festival not in {"Durga", "Ganesh"}:
+        raise HTTPException(400, "festival must be Durga or Ganesh")
+    try:
+        return build_brief(rank_ghats(festival), festival)
+    except NotImplementedError:
+        raise HTTPException(501, "Ranking not implemented yet")

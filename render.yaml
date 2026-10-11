@@ -13,8 +13,6 @@ services:
       - key: ALLOWED_ORIGINS
         sync: false            # set to your Vercel URL, e.g. https://ghat-watch.vercel.app
       - key: LLM_PROVIDER
-        value: none            # cerebras | anthropic | none
-      - key: CEREBRAS_API_KEY
-        sync: false
-      - key: ANTHROPIC_API_KEY
+        value: none            # groq | none
+      - key: GROQ_API_KEY
         sync: false
