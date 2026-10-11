@@ -4,6 +4,7 @@ All run offline against the live ranking (rank_ghats on the committed CSV), so
 they keep working after data/fixtures/ is deleted. No test calls a real LLM.
 Run with: cd backend && python -m pytest tests/test_brief.py -v
 """
+import re
 from copy import deepcopy
 
 import pytest
@@ -387,7 +388,11 @@ def test_brief_never_says_recovered_and_flags_still_above_limits():
     for fest in ("Durga", "Ganesh"):
         b = build_brief(rank_ghats(fest), fest)
         low = b["en"].lower()
-        assert "back to pre" not in low and "recovered" not in low and "clean" not in low
+        assert "back to pre" not in low and "recovered" not in low
+        # "clean" is allowed only as an action for the officer ("Clean the ghat first.", D-22).
+        # It must never describe the water, which is what D-21 guards against.
+        for phrase in ("clean water", "water is clean", "is clean", "now clean", "cleaner"):
+            assert phrase not in low
         assert b["numbers_validated"] is True
     durga = build_brief(rank_ghats("Durga"), "Durga")
     assert "Still above limits after." in durga["en"]
@@ -405,3 +410,75 @@ def test_good_recovery_splits_by_after_severity():
     assert build_facts(r, "Durga")["top"][0]["recovery"] == "good_within_limits"
     r = {"ranking": [dict(base, recovery="poor", after_severity=0.9)], "no_data_sites": []}
     assert build_facts(r, "Durga")["top"][0]["recovery"] == "poor"
+
+
+# ---------- D-22: one action line per top ghat ----------
+
+
+class TestActionLine:
+    def test_every_top_ghat_gets_an_action_in_both_languages(self, rankings):
+        from app.prompts import ACTIONS_EN, ACTIONS_HI
+
+        for festival in FESTIVALS:
+            facts = _facts(rankings, festival)
+            t = render_template(facts)
+            for g in facts["top"]:
+                assert g["action"] in ACTIONS_EN
+                assert ACTIONS_EN[g["action"]] in t["en"]
+                assert ACTIONS_HI[g["action"]] in t["hi"]
+
+    def test_action_survives_the_tightest_detail_level(self, rankings, monkeypatch):
+        """Detail is shed to meet the word cap, but the action is why the officer reads this."""
+        from app.prompts import ACTIONS_EN, ACTIONS_HI
+
+        monkeypatch.setattr(brief_mod, "MAX_WORDS", 100)
+        facts = _facts(rankings, "Durga")
+        t = render_template(facts)
+        for g in facts["top"]:
+            assert ACTIONS_EN[g["action"]] in t["en"]
+            assert ACTIONS_HI[g["action"]] in t["hi"]
+
+    def test_thin_data_asks_for_a_test_first(self):
+        """Low or Medium confidence means test before deciding anything else."""
+        ghat = {"confidence": {"level": "Low"}, "quadrant": "both",
+                "recovery": "poor", "risk_level": "High"}
+        assert brief_mod._action_key(ghat) == "test"
+        ghat["confidence"] = {"level": "Medium"}
+        assert brief_mod._action_key(ghat) == "test"
+
+    def test_action_follows_the_data_when_confidence_is_high(self):
+        high = {"confidence": {"level": "High"}}
+        assert brief_mod._action_key({**high, "quadrant": "damaged_by_immersion",
+                                      "recovery": "good", "risk_level": "Medium"}) == "clear_and_aerate"
+        assert brief_mod._action_key({**high, "quadrant": "stable",
+                                      "recovery": "poor", "risk_level": "Low"}) == "clear_and_aerate"
+        assert brief_mod._action_key({**high, "quadrant": "already_bad",
+                                      "recovery": "good", "risk_level": "Medium"}) == "clean_before"
+        assert brief_mod._action_key({**high, "quadrant": "stable",
+                                      "recovery": "good", "risk_level": "Low"}) == "watch"
+
+    def test_actions_carry_no_numbers_and_no_health_words(self):
+        from app.prompts import ACTIONS_EN, ACTIONS_HI
+
+        for table in (ACTIONS_EN, ACTIONS_HI):
+            for text in table.values():
+                assert not re.search(r"\d", text)
+                assert not brief_mod._HEALTH_WORDS.search(text)
+
+    def test_llm_is_given_the_action_wording(self, rankings, monkeypatch):
+        """The LLM rephrases; it is never left to invent an action."""
+        from app.prompts import ACTIONS_EN, ACTIONS_HI
+
+        captured = {}
+
+        def fake_groq(user_msg):
+            captured["msg"] = user_msg
+            return None
+
+        monkeypatch.setattr(brief_mod.config, "LLM_PROVIDER", "groq")
+        monkeypatch.setattr(brief_mod, "_call_groq", fake_groq)
+        facts = _facts(rankings, "Durga")
+        brief_mod.call_llm(facts)
+        for g in facts["top"]:
+            assert ACTIONS_EN[g["action"]] in captured["msg"]
+            assert ACTIONS_HI[g["action"]] in captured["msg"]

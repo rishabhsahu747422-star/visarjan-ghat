@@ -62,6 +62,30 @@ PHRASES_HI = {
 }
 
 # ---------------------------------------------------------------------------
+# Action line (one per top ghat).
+#
+# The officer decides cleaning, aeration and testing (PRD section 3), so the brief
+# names one option per ghat instead of leaving them to work it out from the scores.
+# The key is chosen in brief.py from computed values only; these are the words for it.
+# Deliberately phrased as an action to plan, never as a promised outcome, never health.
+# Hindi reviewer: check these four strings.
+# ---------------------------------------------------------------------------
+
+ACTIONS_EN = {
+    "test": "Add a test during immersion.",
+    "clear_and_aerate": "Clear waste, then aerate.",
+    "clean_before": "Clean the ghat first.",
+    "watch": "Keep the routine round.",
+}
+
+ACTIONS_HI = {
+    "test": "विसर्जन के दौरान एक और जाँच।",
+    "clear_and_aerate": "सामग्री हटाएँ, वायु-संचार कराएँ।",
+    "clean_before": "पहले घाट की सफाई कराएँ।",
+    "watch": "नियमित राउंड जारी रखें।",
+}
+
+# ---------------------------------------------------------------------------
 # Site names (Hindi) — reviewer: verify transliterations
 # ---------------------------------------------------------------------------
 
@@ -122,7 +146,7 @@ FOOTER_EN = (
 
 FOOTER_HI = (
     "केवल पिछली रीडिंग, 20 अक्टूबर का पूर्वानुमान नहीं। "
-    "रीडिंग की तुलना सीमा से है; यह स्वास्थ्य आकलन नहीं है। "
+    "तुलना केवल सीमा से; यह स्वास्थ्य आकलन नहीं। "
     "स्रोत पृष्ठ टूल में हैं।"
 )
 
@@ -142,6 +166,7 @@ Rules:
 - Quadrant meanings: already_bad = poor before immersion; damaged_by_immersion = worse during immersion; both = poor before and worse during; stable = no clear rise during immersion (it does NOT mean within limits); unknown = phases not comparable.
 - Recovery meanings: good_above_limits = no worse after than before immersion but still above the limits; good_within_limits = within limits after; poor = still worse after; unknown = not measured. Never say "recovered", "improved" or "clean".
 - When a ghat's confidence is not High, say so with the reason.
+- End each ghat's entry with its action_en sentence exactly as given (in Hindi, action_hi). Do not invent, reorder or add actions.
 - Name every site in FACTS.no_data_sites as "no data, test before use".
 - In Hindi use the site names given in FACTS.site_names_hi exactly.
 - Keep each version under 100 words. Plain text with line breaks, no markdown, no emoji.

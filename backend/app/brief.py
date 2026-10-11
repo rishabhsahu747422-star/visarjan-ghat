@@ -13,7 +13,8 @@ import httpx
 
 from . import config
 from .prompts import (
-    FESTIVAL_HI,
+    ACTIONS_EN,
+    ACTIONS_HI,
     FESTIVAL_HI_SHORT,
     FOOTER_EN,
     FOOTER_HI,
@@ -96,6 +97,22 @@ def _worst_reading(evidence: list[dict], parameter: str) -> dict | None:
     return None
 
 
+def _action_key(ghat: dict) -> str:
+    """Pick one action per top ghat from computed values only (D-22).
+
+    Thin data comes first: a Low or Medium confidence ghat needs a reading more than it
+    needs a decision, and those ghats are exactly the ones `test_priority` lifts.
+    Then immersion damage, then a poor baseline. Nothing here is a health statement.
+    """
+    if ghat.get("confidence", {}).get("level", "Low") != "High":
+        return "test"
+    if ghat.get("quadrant") in ("damaged_by_immersion", "both") or ghat.get("recovery") == "poor":
+        return "clear_and_aerate"
+    if ghat.get("risk_level") in ("High", "Medium"):
+        return "clean_before"
+    return "watch"
+
+
 def build_facts(ranking_result: dict, festival: str) -> dict:
     """Build the small facts dict from ranking output for the brief."""
     ranking = ranking_result.get("ranking", [])
@@ -132,6 +149,7 @@ def build_facts(ranking_result: dict, festival: str) -> dict:
                 "ph": _worst_reading(evidence, "pH"),
             },
             "bmc_list_2026": ghat.get("bmc_list_2026", "unknown"),
+            "action": _action_key(ghat),
         })
 
     # Low-confidence sites (from all ranked ghats, not just top 3)
@@ -160,8 +178,9 @@ MAX_WORDS = 150  # per language, footer included
 
 # Detail levels tried in order until the brief fits MAX_WORDS.
 # 0: everything; 1: drop confidence reasons (the level stays);
-# 2: also drop the "thin data" line; 3: also drop quadrant/recovery phrases.
-_DETAIL_LEVELS = (0, 1, 2, 3)
+# 2: also drop the "thin data" line; 3: also drop the quadrant phrase;
+# 4: also drop the recovery phrase. The action line is never dropped (D-22).
+_DETAIL_LEVELS = (0, 1, 2, 3, 4)
 
 
 def _years_text(years: list[int], joiner: str = "and") -> str:
@@ -224,7 +243,7 @@ def _render_en(facts: dict, level: int) -> str:
     lines = [
         f"Visarjan Ghat Watch: {facts['festival']} brief",
         f"MPPCB readings {_years_text(facts['years'])} vs CPCB Class B "
-        f"(DO >= 5, BOD <= 3 mg/l, pH 6.5-8.5).",
+        f"(DO>=5, BOD<=3 mg/l, pH 6.5-8.5).",
         "",
         "Ghats to act on first:",
     ]
@@ -236,8 +255,8 @@ def _render_en(facts: dict, level: int) -> str:
         ]
         line = (f"{g['rank']}. {g['site']}: {PHRASES_EN['risk'][g['risk_level']]} risk. "
                 f"{', '.join(readings) or PHRASES_EN['within']}.")
-        if level < 3:
-            quad = PHRASES_EN["quadrant"].get(g["quadrant"], "")
+        if level < 4:
+            quad = PHRASES_EN["quadrant"].get(g["quadrant"], "") if level < 3 else ""
             recov = PHRASES_EN["recovery"].get(g["recovery"], "")
             line += f" {quad} {recov}"
         if g["confidence"] != "High":
@@ -245,6 +264,8 @@ def _render_en(facts: dict, level: int) -> str:
             if level < 1 and g["confidence_reasons"]:
                 line += ": " + "; ".join(g["confidence_reasons"])
             line += "."
+        # The action is the point of the brief, so it survives every detail level (D-22).
+        line = line.rstrip() + " " + ACTIONS_EN[g["action"]]
         lines.append(" ".join(line.split()))
 
     if facts["no_data_sites"]:
@@ -259,13 +280,13 @@ def _render_en(facts: dict, level: int) -> str:
 
 
 def _render_hi(facts: dict, level: int) -> str:
-    festival_hi = FESTIVAL_HI.get(facts["festival"], facts["festival"])
+    festival_hi = FESTIVAL_HI_SHORT.get(facts["festival"], facts["festival"])
     lines = [
         f"विसर्जन घाट वॉच: {festival_hi} ब्रीफ",
-        f"MPPCB की {_years_text(facts['years'], 'और')} की रीडिंग, "
-        f"CPCB क्लास B सीमा से तुलना (DO >= 5, BOD <= 3 mg/l, pH 6.5-8.5)।",
+        f"MPPCB रीडिंग {_years_text(facts['years'], 'और')}, "
+        f"CPCB क्लास B सीमा से तुलना (DO>=5, BOD<=3 mg/l, pH 6.5-8.5)।",
         "",
-        "पहले इन घाटों पर ध्यान दें:",
+        "इन घाटों पर पहले ध्यान:",
     ]
 
     first_do = True
@@ -285,8 +306,8 @@ def _render_hi(facts: dict, level: int) -> str:
 
         line = (f"{g['rank']}. {site_hi}: जोखिम {PHRASES_HI['risk'][g['risk_level']]}। "
                 f"{', '.join(readings) or PHRASES_HI['within']}।")
-        if level < 3:
-            quad = PHRASES_HI["quadrant"].get(g["quadrant"], "")
+        if level < 4:
+            quad = PHRASES_HI["quadrant"].get(g["quadrant"], "") if level < 3 else ""
             recov = PHRASES_HI["recovery"].get(g["recovery"], "")
             line += f" {quad} {recov}"
         if g["confidence"] != "High":
@@ -294,12 +315,13 @@ def _render_hi(facts: dict, level: int) -> str:
             if level < 1 and g["confidence_reasons"]:
                 line += ": " + _confidence_reason_hi(g["confidence_reasons"])
             line += "।"
+        line = line.rstrip() + " " + ACTIONS_HI[g["action"]]
         lines.append(" ".join(line.split()))
 
     if facts["no_data_sites"]:
         lines.append("")
         names_hi = ", ".join(SITE_HI.get(s, s) for s in facts["no_data_sites"])
-        lines.append(f"डेटा नहीं: {names_hi}। उपयोग से पहले जाँच करें।")
+        lines.append(f"डेटा नहीं: {names_hi}। पहले जाँच कराएँ।")
 
     thin = _low_not_top(facts)
     if thin and level < 2:
@@ -473,6 +495,10 @@ def call_llm(facts: dict) -> dict | None:
     # Attach Hindi site names so the LLM can use them
     llm_facts = dict(facts)
     llm_facts["site_names_hi"] = {}
+    llm_facts["top"] = [
+        {**g, "action_en": ACTIONS_EN[g["action"]], "action_hi": ACTIONS_HI[g["action"]]}
+        for g in facts.get("top", [])
+    ]
     for g in facts.get("top", []):
         llm_facts["site_names_hi"][g["site"]] = SITE_HI.get(g["site"], g["site"])
     for s in facts.get("no_data_sites", []):
