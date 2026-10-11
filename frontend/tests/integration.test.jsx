@@ -12,6 +12,7 @@ import { FestivalProvider } from '../src/context/FestivalContext';
 import RankingsPage from '../src/pages/RankingsPage';
 import GhatDetailPage from '../src/pages/GhatDetailPage';
 import OfficialBriefPage from '../src/pages/OfficialBriefPage';
+import LandingPage from '../src/pages/LandingPage';
 import EvidenceTimeline from '../src/components/tables/EvidenceTimeline';
 import { installApiMock, rankingDurga } from './apiMock';
 
@@ -179,5 +180,28 @@ describe('brief', () => {
 
     await screen.findByText(/Template \(no model\)/);
     expect(screen.getByText(/Yes, against the computed data/)).toBeInTheDocument();
+  });
+});
+
+describe('landing page', () => {
+  it('reads the golden numbers from the API rather than the markup', async () => {
+    renderAt('/', <LandingPage />);
+
+    // Typed-in numbers came back with the v2 landing design once already. If these are
+    // hardcoded again, the stub below is ignored and this test fails.
+    await screen.findByText('1,524');
+    expect(screen.getByText('42 / 116')).toBeInTheDocument();
+    expect(screen.getByText('100 / 112')).toBeInTheDocument();
+    expect(calls.some((u) => u.includes('/api/summary'))).toBe(true);
+  });
+
+  it('says nothing about clean or safe water', async () => {
+    renderAt('/', <LandingPage />);
+    await screen.findByText('1,524');
+
+    const text = document.body.textContent;
+    expect(text).not.toMatch(/hypox/i);      // no clinical language
+    expect(text).not.toMatch(/clean/i);    // water is never described as clean
+    expect(text).not.toMatch(/safe/i);     // and never as safe
   });
 });
